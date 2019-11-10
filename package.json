@@ -1,0 +1,32 @@
+{
+  "name": "cafepedia-frontend",
+  "version": "1.0.0",
+  "description": "cafepedia's frontend project",
+  "author": "hatsu38 <hajiwata0308@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env HOST=0.0.0.0 PORT=3000 nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.8.0",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/vuetify": "^1.9.0",
+    "cross-env": "^6.0.3",
+    "nuxt": "^2.0.0",
+    "vue-infinite-loading": "^2.4.4",
+    "vue2-google-maps": "^0.10.7"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.11.2",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^4.19.1",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-vue": "^4.0.0"
+  }
+}

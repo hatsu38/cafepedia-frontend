@@ -10,14 +10,7 @@
       <v-row no-gutters dense>
         <v-col cols="3" sm="6" md="8">
           <v-card flat>
-            <v-img
-              src="https://lohas.nicoseiga.jp/thumb/865728i?1303612428"
-              lazy-src="https://picsum.photos/id/11/10/6"
-              aspect-ratio="1"
-              class="grey lighten-2"
-              max-width="100"
-              max-height="100"
-            ></v-img>
+            <img :src="`https://hajiwata.com/${cafe.image}`" width="100" height="100">
             <v-card-actions>
               <v-row align="center" justify="space-around">
                 <v-col cols="4">
@@ -65,7 +58,7 @@
         </v-col>
       </v-row>
     </v-card>
-    <infinite-loading spinner="waveDots" @infinite="searchFetch" :distance="500">
+    <infinite-loading spinner="waveDots" @infinite="infiniteScroll" :distance="500">
       <!-- slotでメッセージをカスタマイズできる -->
       <div slot="no-more"></div>
       <div slot="no-results"></div>
@@ -75,12 +68,8 @@
 
 <script>
 import axios from 'axios'
-import InfiniteLoading from "vue-infinite-loading";
 export default {
   props: ['searchQuery'],
-  components: {
-    InfiniteLoading
-  },
   data() {
     return {
       count: 20,
@@ -113,12 +102,6 @@ export default {
     }
   },
   methods: {
-    infiniteHandler() {
-      setTimeout(() => {
-        this.count += 20
-        this.$refs.infiniteLoading.stateChanger.loaded()
-      }, 1000)
-    },
     getPosition() {
       return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject, this.geolocation_optoins);
@@ -141,10 +124,9 @@ export default {
       this.lat = position.coords.latitude
       this.lng = position.coords.longitude
     },
-    async searchFetch($state) {
-      console.log("search!")
+    async infiniteScroll($state){
       const res = await axios.
-                        get('http://localhost:3001/api/search?',
+                        get('https://hajiwata.com/api/search?',
                             { params:
                               {
                                 lat: this.lat,
@@ -163,6 +145,21 @@ export default {
       } else {
         $state.complete()
       }
+    },
+    async searchFetch() {
+      const res = await axios.
+                        get('https://hajiwata.com/api/search?',
+                            { params:
+                              {
+                                lat: this.lat,
+                                lng: this.lng,
+                                socket: this.searchQuery.haveSocket,
+                                wifi: this.searchQuery.haveWifi,
+                                smoking: this.searchQuery.haveSmoking
+                              }
+                            }
+                          )
+      this.cafes = res.data.shops
     }
   }
 }

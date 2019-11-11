@@ -84,13 +84,18 @@ export default {
     }
   },
   async beforeMount() {
-    try {
-      const position = await this.getPosition()
-      this.updatePosition(position)
-    }
-    catch(error){
-      this.lat = 35.6589568
-      this.lng = 139.7219328
+    if (this.$nuxt.$route.query.lat && this.$nuxt.$route.query.lng){
+      this.lat = this.$nuxt.$route.query.lat
+      this.lng = this.$nuxt.$route.query.lng
+    } else {
+      try {
+        const position = await this.getPosition()
+        this.updatePosition(position)
+      }
+      catch(error){
+        this.lat = 35.6589568
+        this.lng = 139.7219328
+      }
     }
   },
   watch: {
@@ -103,16 +108,9 @@ export default {
   },
   methods: {
     getPosition() {
-      if (this.$nuxt.$route.query.lat && this.$nuxt.$route.query.lng){
-        console.log("paramsから取得！")
-        this.lat = this.$nuxt.$route.query.lat
-        this.lng = this.$nuxt.$route.query.lng
-      } else{
-        console.log("現在地から取得！")
-        return new Promise((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject, this.geolocation_optoins);
-        })
-      }
+      return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, this.geolocation_optoins);
+      })
     },
     async clickUpdateLatLng() {
       try {

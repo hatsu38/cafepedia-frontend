@@ -5,7 +5,7 @@
     </v-btn>
     <v-card v-for="cafe in cafes" :key="cafe.name" class="mb-2">
       <v-card-title class="subtitle-1 pb-1">
-        <nuxt-link :to="{name:'cafes-id',params:{id:cafe.id},query: { lat: lat,lng: lng }}">{{ cafe.name }}</nuxt-link>
+        <nuxt-link :to="{name:'cafes-id',params:{id:cafe.id},query: { lat: lat,lng: lng, socket: searchQuery.haveSocket, wifi: searchQuery.havewifi, smoking: searchQuery.havesmoking  }}">{{ cafe.name }}</nuxt-link>
       </v-card-title>
       <v-row no-gutters dense>
         <v-col cols="3" sm="6" md="8">
@@ -103,9 +103,16 @@ export default {
   },
   methods: {
     getPosition() {
-      return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject, this.geolocation_optoins);
-      })
+      if (this.$nuxt.$route.query.lat && this.$nuxt.$route.query.lng){
+        console.log("paramsから取得！")
+        this.lat = this.$nuxt.$route.query.lat
+        this.lng = this.$nuxt.$route.query.lng
+      } else{
+        console.log("現在地から取得！")
+        return new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject, this.geolocation_optoins);
+        })
+      }
     },
     async clickUpdateLatLng() {
       try {

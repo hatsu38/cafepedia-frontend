@@ -42,7 +42,7 @@
             <span class="group pa-1 pink lighten-1" small v-if="cafe.wifi">
               <v-icon small color="white">fas fa-wifi</v-icon>
             </span>
-            <span class="group indigo lighten-1" small style="padding: 4px 9px;" v-if="cafe.socket">
+            <span class="group indigo lighten-1 px-2 py-1" small v-if="cafe.socket">
               <v-icon small color="white">fas fa-plug</v-icon>
             </span>
             <span class="group pa-1 teal lighten-1" small v-if="cafe.smoking">

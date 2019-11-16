@@ -1,16 +1,21 @@
 <template>
   <div>
     <show-cafe />
-    <cafe-lists :searchQuery="searchQuery" />
+    <comment-form />
+    <section class="container">
+      <cafe-lists :searchQuery="searchQuery" />
+    </section>
   </div>
 </template>
 
 <script>
 import ShowCafe from '~/components/ShowCafe.vue'
+import CommentForm from '~/components/CommentForm.vue'
 import CafeLists from '~/components/CafeLists.vue'
 export default {
   components: {
     ShowCafe,
+    CommentForm,
     CafeLists
   },
   data() {

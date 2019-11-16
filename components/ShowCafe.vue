@@ -1,49 +1,77 @@
 <template>
   <div>
-    <v-simple-table>
-      <tbody>
-        <tr>
-          <td>名前</td>
-          <td>{{ cafe.name}}</td>
-        </tr>
-        <tr v-if="cafe.distance">
-          <td>距離</td>
-          <td>{{ cafe.distance }}</td>
-        </tr>
-        <tr v-if="cafe.business_hour">
-          <td>営業時間</td>
-          <td>{{ cafe.business_hour }}</td>
-        </tr>
-        <tr v-if="cafe.other_address">
-          <td>住所</td>
-          <td>{{ cafe.prefecture }}{{cafe.city}}{{cafe.other_address}}</td>
-        </tr>
-        <tr v-if="cafe.access">
-          <td>アクセス</td>
-          <td>{{ cafe.access }}</td>
-        </tr>
-        <tr v-if="cafe.hp">
-          <td>HP</td>
-          <td><a :href="cafe.hp">{{ cafe.name}}</a></td>
-        </tr>
-        <tr v-if="cafe.chair">
-          <td>HP</td>
-          <td>{{ cafe.chair }}</td>
-        </tr>
-        <tr v-if="cafe.tel">
-          <td>TEL</td>
-          <td>{{ cafe.tel }}</td>
-        </tr>
-        <tr>
-          <td>設備</td>
-          <td>
-            <v-icon v-if="cafe.wifi" small color="pink" class="mr-2">fas fa-wifi</v-icon>
-            <v-icon v-if="cafe.socket" small color="indigo" class="mr-2">fas fa-plug</v-icon>
-            <v-icon v-if="cafe.smoking" small color="teal">fas fa-smoking</v-icon>
-          </td>
-        </tr>
-      </tbody>
-    </v-simple-table>
+    <v-card class="mx-auto">
+      <v-list-item three-line>
+        <v-list-item-content>
+          <v-list-item-subtitle
+            class="subtitle-1 font-weight-black"
+            style="line-height: 1.35; color: #4f4f4f;"
+          >{{ cafe.name}}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+      <v-card-text class=" pt-0 mt-n5">
+        <v-row justify="space-around" align="center" class="pt-0">
+          <v-col
+            cols="auto"
+            class="display-2 pa-0"
+          >
+            <v-icon :class="cafe.main_shop_eng_name">fas fa-location-arrow</v-icon>
+            <span :class="cafe.main_shop_eng_name">{{cafe.distance}}</span>
+          </v-col>
+          <v-col cols="auto pa-0">
+            <img :src="`https://hajiwata.com/${cafe.image}`" width="90" height="90">
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <v-card-text>
+        <v-chip
+          :class="(cafe.wifi) ? 'have-wifi' : 'have-not-facility'"
+        >
+          <v-icon small class="mr-1" :class="(cafe.wifi) ? 'have-wifi' : 'have-not-facility'">fas fa-wifi</v-icon>
+          Wi-Fi
+        </v-chip>
+        <v-chip
+          :class="(cafe.socket) ? 'have-socket' : 'have-not-facility'"
+        >
+          <v-icon small class="mr-1" :class="(cafe.socket) ? 'have-socket' : 'have-not-facility'">fas fa-plug</v-icon>
+          コンセント
+        </v-chip>
+        <v-chip
+          :class="(cafe.smoking) ? 'have-smoking' : 'have-not-facility'"
+        >
+          <v-icon small class="mr-1" :class="(cafe.smoking) ? 'have-smoking' : 'have-not-facility'">fas fa-smoking</v-icon>
+          喫煙席
+        </v-chip>
+      </v-card-text>
+      <v-simple-table>
+        <tbody>
+          <tr v-if="cafe.business_hour">
+            <td><v-icon style="font-size: 18px;">fas fa-clock</v-icon></td>
+            <td class="pl-0 body-2">{{ cafe.business_hour }}</td>
+          </tr>
+          <tr v-if="cafe.other_address">
+            <td><v-icon style="font-size: 18px;">fas fa-map</v-icon></td>
+            <td class="pl-0 body-2">{{ cafe.prefecture }}{{cafe.city}}{{cafe.other_address}}</td>
+          </tr>
+          <tr v-if="cafe.access">
+            <td><v-icon style="font-size: 18px;">fas fa-map-marker-alt</v-icon></td>
+            <td class="pl-0 body-2">{{ cafe.access }}</td>
+          </tr>
+          <tr v-if="cafe.hp">
+            <td><v-icon style="font-size: 18px;">fas fa-external-link-alt</v-icon></td>
+            <td class="pl-0 body-2"><a :href="cafe.hp">{{ cafe.name}}</a></td>
+          </tr>
+          <tr v-if="cafe.chair">
+            <td><v-icon style="font-size: 18px;">fas fa-chair</v-icon></td>
+            <td class="pl-0 body-2">{{ cafe.chair }}</td>
+          </tr>
+          <tr v-if="cafe.tel">
+            <td><v-icon style="font-size: 18px;">fas fa-phone</v-icon></td>
+            <td class="pl-0 body-2">{{ cafe.tel }}</td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+    </v-card>
     <GmapMap
       :center="cafe_position"
       :zoom="15"
@@ -59,10 +87,56 @@
     </GmapMap>
   </div>
 </template>
-
+<style scoped>
+.have-not-facility{
+  background-color: #E0E0E0 !important;
+  color: #BDBDBD;
+}
+.have-smoking{
+  background-color: #26A69A !important;
+  color: #ffffff;
+}
+.have-wifi{
+  background-color: #EC407A !important;
+  color: #ffffff;
+}
+.have-socket{
+  background-color: #5C6BC0 !important;
+  color: #ffffff;
+}
+.starbacks {
+  color: #0A7042 !important;
+}
+.pronto{
+  color: #04483A !important;
+}
+.tullys {
+  color: #B65900 !important;
+}
+.doutor {
+  color: #F9CC21 !important;
+}
+.kissa_renoir{
+  color: #000000 !important;
+}
+.komeda{
+  color: #0D2881 !important;
+}
+.ueshima{
+  color: #723E32 !important;
+}
+.newyorkers{
+  color: #070b3b !important;
+}
+.cafemiyama{
+  color: #F8931D !important;
+}
+.myspace{
+  color: #7D5B2E !important;
+}
+</style>
 <script>
 import axios from 'axios'
-
 export default {
   data() {
     return {
@@ -76,11 +150,10 @@ export default {
                     lat: this.$nuxt.$route.query.lat,
                     lng: this.$nuxt.$route.query.lng
                   }
-    const res = await axios.get(`https://hajiwata.com/api/shops/${this.$nuxt.$route.params.id}`,{params: query})
+    const res = await axios.get(`http://localhost:3001/api/shops/${this.$nuxt.$route.params.id}`,{params: query})
     this.cafe = res.data.shop
     this.cafe_position.lat = Number(this.cafe.lat)
     this.cafe_position.lng = Number(this.cafe.lng)
   },
 }
-
 </script>

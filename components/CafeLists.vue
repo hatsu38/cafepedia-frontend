@@ -1,62 +1,60 @@
 <template>
   <div class="cafe-lists">
     <v-btn block outlined color="orange accent-3" class="white--text mb-3" @click="clickUpdateLatLng">
-      現在地を取得
+      <v-icon small class="mr-1">fas fa-map-marker-alt</v-icon>現在地を取得
     </v-btn>
-    <v-card v-for="cafe in cafes" :key="cafe.name" class="mb-2">
-      <v-card-title class="subtitle-1 pb-1">
-        <nuxt-link :to="{name:'cafes-id',params:{id:cafe.id},query: { lat: lat,lng: lng, socket: searchQuery.haveSocket, wifi: searchQuery.havewifi, smoking: searchQuery.havesmoking  }}">{{ cafe.name }}</nuxt-link>
-      </v-card-title>
-      <v-row no-gutters dense>
-        <v-col cols="3" sm="6" md="8">
-          <v-card flat>
-            <img :src="`https://hajiwata.com/${cafe.image}`" width="100" height="100">
-            <v-card-actions>
-              <v-row align="center" justify="space-around">
-                <v-col cols="4">
-                  <v-icon v-if="cafe.wifi" small color="pink">fas fa-wifi</v-icon>
-                </v-col>
-                <v-col cols="4">
-                  <v-icon v-if="cafe.socket" small color="indigo">fas fa-plug</v-icon>
-                </v-col>
-                <v-col cols="4">
-                  <v-icon v-if="cafe.smoking" small color="teal">fas fa-smoking</v-icon>
-                </v-col>
-              </v-row>
-            </v-card-actions>
-          </v-card>
+    <v-card v-for="cafe in cafes" :key="cafe.name"
+      class="mb-4 card-side-width"
+      outlined
+      :class="cafe.main_shop_eng_name"
+    >
+      <v-list-item three-line>
+        <v-list-item-content>
+          <v-list-item-title class="subtitle-1 mb-1" >
+            <nuxt-link :to="{name:'cafes-id',params:{id:cafe.id},query: { lat: lat,lng: lng, socket: searchQuery.haveSocket, wifi: searchQuery.havewifi, smoking: searchQuery.havesmoking  }}">{{ cafe.name }}</nuxt-link>
+          </v-list-item-title>
+          <v-simple-table dense>
+            <tbody class="caption">
+              <tr>
+                <th class="pa-1 caption">
+                  <v-icon small class="pa-1">fas fa-map</v-icon>
+                </th>
+                <td class="pa-1 caption">
+                  {{cafe.prefecture}} {{cafe.city}} {{ cafe.other_address}}
+                </td>
+              </tr>
+              <tr>
+                <th class="pa-1 caption">
+                  <v-icon small style="padding: 4px 2px;">fas fa-clock</v-icon>
+                </th>
+                <td class="pa-1 caption">
+                  {{cafe.business_hour}}
+                </td>
+              </tr>
+            </tbody>
+          </v-simple-table>
+        </v-list-item-content>
+        <img :src="`https://hajiwata.com/${cafe.image}`" width="100" height="100" tile class="pt-3">
+      </v-list-item>
+      <v-card-actions class="pt-0">
+        <v-row class="d-flex justify-start" flat tile>
+          <v-col cols="auto" justify="center">
+            <span class="group pa-1 pink lighten-1" small v-if="cafe.wifi">
+              <v-icon small color="white">fas fa-wifi</v-icon>
+            </span>
+            <span class="group indigo lighten-1" small style="padding: 4px 9px;" v-if="cafe.socket">
+              <v-icon small color="white">fas fa-plug</v-icon>
+            </span>
+            <span class="group pa-1 teal lighten-1" small v-if="cafe.smoking">
+              <v-icon small color="white">fas fa-smoking</v-icon>
+            </span>
+          </v-col>
+        </v-row>
+        <v-col cols="auto">
+          <v-icon small class="mb-1">fas fa-location-arrow</v-icon>
+          <span class="title">{{cafe.distance}}</span>
         </v-col>
-        <v-col cols="9" sm="6" md="8">
-          <v-list dense>
-            <v-list-item-group color="primary indigo">
-              <v-list-item>
-                <v-list-item-icon class="mr-1">
-                  <v-icon small>fas fa-map-marker-alt</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="cafe.prefecture + cafe.city + cafe.other_address"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-icon class="mr-1">
-                  <v-icon small>fas fa-clock</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="cafe.business_hour"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-icon class="mr-1">
-                  <v-icon small>fas fa-location-arrow</v-icon>
-                </v-list-item-icon>
-                <v-list-item-content>
-                  <v-list-item-title v-text="cafe.distance"></v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-col>
-      </v-row>
+      </v-card-actions>
     </v-card>
     <infinite-loading spinner="waveDots" @infinite="infiniteScroll" :distance="500">
       <!-- slotでメッセージをカスタマイズできる -->
@@ -65,7 +63,41 @@
     </infinite-loading>
   </div>
 </template>
-
+<style scoped>
+.card-side-width{
+  border-left-width: 3px !important;
+}
+.starbacks {
+  border-left-color: #0A7042 !important;
+}
+.pronto{
+  border-left-color: #04483A !important;
+}
+.tullys {
+  border-left-color: #B65900 !important;
+}
+.doutor {
+  border-left-color: #F9CC21 !important;
+}
+.kissa_renoir{
+  border-left-color: #000000 !important;
+}
+.komeda{
+  border-left-color: #0D2881 !important;
+}
+.ueshima{
+  border-left-color: #723E32 !important;
+}
+.newyorkers{
+  border-left-color: #070b3b !important;
+}
+.cafemiyama{
+  border-left-color: #F8931D !important;
+}
+.myspace{
+  border-left-color: #7D5B2E !important;
+}
+</style>
 <script>
 import axios from 'axios'
 export default {
@@ -88,13 +120,15 @@ export default {
       this.lat = this.$nuxt.$route.query.lat
       this.lng = this.$nuxt.$route.query.lng
     } else {
-      try {
+      try{
         const position = await this.getPosition()
         this.updatePosition(position)
       }
       catch(error){
-        this.lat = 35.6589568
-        this.lng = 139.7219328
+        alert("位置情報の取得に失敗しました"+error.message)
+        this.lat = 35.659328
+        this.lng = 139.700553
+        this.searchFetch()
       }
     }
   },
@@ -119,9 +153,9 @@ export default {
         this.searchFetch()
       }
       catch(error){
-        alert("位置情報の取得に失敗しました"+error)
-        this.lat = 35.6589568
-        this.lng = 139.7219328
+        alert("位置情報の取得に失敗しました"+error.message)
+        this.lat = 35.659328
+        this.lng = 139.700553
         this.searchFetch()
       }
     },

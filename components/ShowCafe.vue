@@ -90,19 +90,19 @@
 <style scoped>
 .have-not-facility{
   background-color: #E0E0E0 !important;
-  color: #BDBDBD;
+  color: #BDBDBD !important;
 }
 .have-smoking{
   background-color: #26A69A !important;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .have-wifi{
   background-color: #EC407A !important;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .have-socket{
   background-color: #5C6BC0 !important;
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .starbacks {
   color: #0A7042 !important;
@@ -150,7 +150,7 @@ export default {
                     lat: this.$nuxt.$route.query.lat,
                     lng: this.$nuxt.$route.query.lng
                   }
-    const res = await axios.get(`http://localhost:3001/api/shops/${this.$nuxt.$route.params.id}`,{params: query})
+    const res = await axios.get(`https://hajiwata.com/api/shops/${this.$nuxt.$route.params.id}`,{params: query})
     this.cafe = res.data.shop
     this.cafe_position.lat = Number(this.cafe.lat)
     this.cafe_position.lng = Number(this.cafe.lng)

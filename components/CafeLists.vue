@@ -25,7 +25,7 @@
               </tr>
               <tr>
                 <th class="pa-1 caption">
-                  <v-icon small style="padding: 4px 2px;">fas fa-clock</v-icon>
+                  <v-icon small style="padding: 4px 2px !important;">fas fa-clock</v-icon>
                 </th>
                 <td class="pa-1 caption">
                   {{cafe.business_hour}}

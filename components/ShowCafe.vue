@@ -23,7 +23,7 @@
           </v-col>
         </v-row>
       </v-card-text>
-      <v-card-text>
+      <v-card-text class="px-1">
         <v-chip
           :class="(cafe.wifi) ? 'have-wifi' : 'have-not-facility'"
         >

@@ -2,6 +2,7 @@ require('dotenv').config()
 const { GOOGLE_MAP_API_KEY } = process.env
 const { CAFEPEDIA_GA_ID } = process.env
 const { CAFEPDIA_NUXT_GTAG_ID } = process.env
+const { CAFEPEDIA_GOOGLE_ADSENSE } = process.env
 const baseName = 'カフェぺディア | あなたの近くにあるカフェがすぐに見つかる'
 const baseDesc = 'カフェペディアは、全国のカフェの設備情報サイトです。「Wi-Fi」「コンセント」「喫煙席」など設備に応じて気になるカフェを探すことが可能です。位置情報をONにすれば、すぐにあなたの近くにあるカフェもわかります。是非カフェ探しにご活用ください!'
 const baseUrl = 'https://cafepedia.jp/'
@@ -29,7 +30,16 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },
       { rel: 'stylesheet', href: "https://use.fontawesome.com/releases/v5.0.13/css/all.css" },
-      {rel: "manifest", href: "/favicons/manifest.json"}
+      { rel: "manifest", href: "/favicons/manifest.json"},
+      { rel: "apple-touch-icon", sizes: "57x57", href: "/favicons/apple-touch-icon-57x57.png"},
+      { rel: "apple-touch-icon", sizes: "60x60", href: "/favicons/apple-touch-icon-60x60.png"},
+      { rel: "apple-touch-icon", sizes: "72x72", href: "/favicons/apple-touch-icon-72x72.png"},
+      { rel: "apple-touch-icon", sizes: "76x76", href: "/favicons/apple-touch-icon-76x76.png"},
+      { rel: "apple-touch-icon", sizes: "114x114", href: "/favicons/apple-touch-icon-114x114.png"},
+      { rel: "apple-touch-icon", sizes: "120x120", href: "/favicons/apple-touch-icon-120x120.png"},
+      { rel: "apple-touch-icon", sizes: "144x144", href: "/favicons/apple-touch-icon-144x144.png"},
+      { rel: "apple-touch-icon", sizes: "152x152", href: "/favicons/apple-touch-icon-152x152.png"},
+      {rel: "apple-touch-icon", sizes: "180x180", href:"/favicons/apple-touch-icon-180x180.png"}
     ]
   },
   /*
@@ -60,7 +70,8 @@ module.exports = {
   env: {
     GOOGLE_MAP_API_KEY,
     CAFEPEDIA_GA_ID,
-    CAFEPDIA_NUXT_GTAG_ID
+    CAFEPDIA_NUXT_GTAG_ID,
+    CAFEPEDIA_GOOGLE_ADSENSE
   },
   plugins: [
     { src: "~/plugins/vue2-google-maps", ssr: false },
@@ -71,7 +82,8 @@ module.exports = {
     "@nuxtjs/axios",
     '@nuxtjs/vuetify',
     ['@nuxtjs/google-analytics', { id: process.env.CAFEPEDIA_GA_ID}],
-    ['@nuxtjs/google-gtag',{id: process.env.CAFEPDIA_NUXT_GTAG_ID}]
+    ['@nuxtjs/google-gtag',{id: process.env.CAFEPDIA_NUXT_GTAG_ID}],
+    ['@nuxtjs/google-adsense', {id: process.env.CAFEPEDIA_GOOGLE_ADSENSE}]
   ],
   axios: {
   },

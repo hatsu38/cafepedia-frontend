@@ -25,8 +25,9 @@ module.exports = {
       { name: 'twitter:site', content: '@hatsu_38' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/images/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },
       { rel: 'stylesheet', href: "https://use.fontawesome.com/releases/v5.0.13/css/all.css" },
+      {rel: "manifest", href: "/favicons/manifest.json"}
     ]
   },
   /*
@@ -76,6 +77,6 @@ module.exports = {
       accent: '#8c9eff',
       error: '#b71c1c'
     },
-  }
+  },
 }
 

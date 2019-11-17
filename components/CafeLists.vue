@@ -11,7 +11,17 @@
       <v-list-item three-line>
         <v-list-item-content>
           <v-list-item-title class="subtitle-1 mb-1" >
-            <nuxt-link :to="{name:'cafes-id',params:{id:cafe.id},query: { lat: lat,lng: lng, socket: searchQuery.haveSocket, wifi: searchQuery.havewifi, smoking: searchQuery.havesmoking  }}">{{ cafe.name }}</nuxt-link>
+            <nuxt-link
+              :to="{name:'cafes-id',
+                    params:{id:cafe.id},
+                    query: {lat: lat,
+                            lng: lng,
+                            socket: searchQuery.haveSocket,
+                            wifi: searchQuery.havewifi,
+                            smoking: searchQuery.havesmoking
+                            }
+                    }"
+            >{{ cafe.name }}</nuxt-link>
           </v-list-item-title>
           <v-simple-table dense>
             <tbody class="caption">
@@ -115,20 +125,35 @@ export default {
       }
     }
   },
+  // 位置情報の取得を行う
   async beforeMount() {
+    // URLから位置情報を取得
     if (this.$nuxt.$route.query.lat && this.$nuxt.$route.query.lng){
-      this.lat = this.$nuxt.$route.query.lat
-      this.lng = this.$nuxt.$route.query.lng
-    } else {
+      this.updatePosition(
+        this.$nuxt.$route.query.lat, this.$nuxt.$route.query.lng
+      )
+    }
+    // URLがからのクエリから位置情報が取得できない
+    // && localStorageから取得できるとき
+    else if(localStorage.getItem("position")) {
+      try{
+        this.getStorage()
+      }
+      catch(error){
+        localStorage.removeItem('position')
+        const position = await this.getPosition()
+        this.updatePosition(position.coords.latitude, position.coords.longitude)
+      }
+    }
+    // URLからもlocalStorageでも取得できないとき
+    else {
       try{
         const position = await this.getPosition()
-        this.updatePosition(position)
+        this.updatePosition(position.coords.latitude, position.coords.longitude)
       }
       catch(error){
         alert("位置情報の取得に失敗しました"+error.message)
-        this.lat = 35.659328
-        this.lng = 139.700553
-        this.searchFetch()
+        this.updatePosition(35.659328, 139.700553)
       }
     }
   },
@@ -138,30 +163,42 @@ export default {
         this.searchFetch()
       },
       deep: true
+    },
+    lat() {
+      this.setStorage()
+    },
+    lng() {
+      this.setStorage()
     }
   },
   methods: {
     getPosition() {
       return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject, this.geolocation_optoins);
+        // 位置情報がOnになっている時
+        if( navigator.geolocation ){
+          navigator.geolocation.getCurrentPosition(resolve, reject, this.geolocation_optoins);
+        }
+        // 位置情報がOffになっているとき
+        else{
+          alert( "あなたの端末では、現在位置を取得できません。" ) ;
+        }
       })
     },
     async clickUpdateLatLng() {
       try {
         const position = await this.getPosition()
-        this.updatePosition(position)
+        this.updatePosition(position.coords.latitude, position.coords.longitude)
         this.searchFetch()
       }
       catch(error){
         alert("位置情報の取得に失敗しました"+error.message)
-        this.lat = 35.659328
-        this.lng = 139.700553
+        this.updatePosition(35.659328, 139.700553)
         this.searchFetch()
       }
     },
-    updatePosition( position ) {
-      this.lat = position.coords.latitude
-      this.lng = position.coords.longitude
+    updatePosition(lat, lng) {
+      this.lat = lat
+      this.lng = lng
     },
     async infiniteScroll($state){
       const res = await axios.
@@ -200,8 +237,18 @@ export default {
                           )
       this.cafes = res.data.shops
       this.page = 2
+    },
+    setStorage(){
+      localStorage.removeItem("position")
+      const position = {"current_lat": this.lat, "current_lng": this.lng}
+      localStorage.setItem(
+        "position", JSON.stringify(position)
+      )
+    },
+    getStorage(){
+      const position = JSON.parse(localStorage.getItem("position"))
+      this.updatePosition(position["current_lat"], position["current_lng"])
     }
   }
 }
-
 </script>

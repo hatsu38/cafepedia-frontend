@@ -1,6 +1,13 @@
 <template>
   <div class="cafe-lists">
-    <v-btn block outlined color="orange accent-3" class="white--text mb-3" @click="clickUpdateLatLng">
+    <v-btn
+      block
+      outlined
+      color="orange"
+      class="mb-3"
+      @click="clickUpdateLatLng"
+      :class="{currentPositionGettingNow: currentPositionGettingNow}"
+    >
       <v-icon small class="mr-1">fas fa-map-marker-alt</v-icon>現在地を取得
     </v-btn>
     <v-card v-for="cafe in cafes" :key="cafe.id"
@@ -72,6 +79,10 @@
   </div>
 </template>
 <style scoped>
+.currentPositionGettingNow{
+  background-color: #FF9100;
+  color: #ffffff !important;
+}
 .white-space-pre-inline{
   white-space: pre-line;
 }
@@ -119,6 +130,7 @@ export default {
       page: 1,
       lat: undefined,
       lng: undefined,
+      currentPositionGettingNow: false,
       geolocation_optoins: {
         "enableHighAccuracy": true,
         "maximumAge": 2000,
@@ -185,6 +197,8 @@ export default {
       })
     },
     async clickUpdateLatLng() {
+      // 現在地取得(取得中はcurrentPositionGettingNow クラスをつける)
+      this.currentPositionGettingNow = true
       try {
         const position = await this.getPosition()
         this.updatePosition(position.coords.latitude, position.coords.longitude)
@@ -195,6 +209,8 @@ export default {
         this.updatePosition(35.659328, 139.700553)
         this.searchFetch()
       }
+      // 現在地取得(取得中後はcurrentPositionGettingNow クラスを外す)
+      this.currentPositionGettingNow = false
     },
     updatePosition(lat, lng) {
       this.lat = lat

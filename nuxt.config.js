@@ -1,5 +1,7 @@
 require('dotenv').config()
 const { GOOGLE_MAP_API_KEY } = process.env
+const { CAFEPEDIA_GA_ID } = process.env
+const { CAFEPDIA_NUXT_GTAG_ID } = process.env
 const baseName = 'カフェぺディア | あなたの近くにあるカフェがすぐに見つかる'
 const baseDesc = 'カフェペディアは、全国のカフェの設備情報サイトです。「Wi-Fi」「コンセント」「喫煙席」など設備に応じて気になるカフェを探すことが可能です。位置情報をONにすれば、すぐにあなたの近くにあるカフェもわかります。是非カフェ探しにご活用ください!'
 const baseUrl = 'https://cafepedia.jp/'
@@ -25,8 +27,9 @@ module.exports = {
       { name: 'twitter:site', content: '@hatsu_38' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/images/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },
       { rel: 'stylesheet', href: "https://use.fontawesome.com/releases/v5.0.13/css/all.css" },
+      {rel: "manifest", href: "/favicons/manifest.json"}
     ]
   },
   /*
@@ -55,7 +58,9 @@ module.exports = {
     }
   },
   env: {
-    GOOGLE_MAP_API_KEY
+    GOOGLE_MAP_API_KEY,
+    CAFEPEDIA_GA_ID,
+    CAFEPDIA_NUXT_GTAG_ID
   },
   plugins: [
     { src: "~/plugins/vue2-google-maps", ssr: false },
@@ -64,7 +69,9 @@ module.exports = {
   vendor: ['vue2-google-maps'],
   modules: [
     "@nuxtjs/axios",
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    ['@nuxtjs/google-analytics', { id: process.env.CAFEPEDIA_GA_ID}],
+    ['@nuxtjs/google-gtag',{id: process.env.CAFEPDIA_NUXT_GTAG_ID}]
   ],
   axios: {
   },
@@ -76,6 +83,6 @@ module.exports = {
       accent: '#8c9eff',
       error: '#b71c1c'
     },
-  }
+  },
 }
 

@@ -3,7 +3,7 @@
     <v-btn block outlined color="orange accent-3" class="white--text mb-3" @click="clickUpdateLatLng">
       <v-icon small class="mr-1">fas fa-map-marker-alt</v-icon>現在地を取得
     </v-btn>
-    <v-card v-for="cafe in cafes" :key="cafe.name"
+    <v-card v-for="cafe in cafes" :key="cafe.id"
       class="mb-4 card-side-width"
       outlined
       :class="cafe.main_shop_eng_name"
@@ -27,9 +27,7 @@
                 <th class="pa-1 caption">
                   <v-icon small style="padding: 4px 2px !important;">fas fa-clock</v-icon>
                 </th>
-                <td class="pa-1 caption">
-                  {{cafe.business_hour}}
-                </td>
+                <td class="pa-1 caption white-space-pre-inline">{{cafe.business_hour}}</td>
               </tr>
             </tbody>
           </v-simple-table>
@@ -56,7 +54,7 @@
         </v-col>
       </v-card-actions>
     </v-card>
-    <infinite-loading spinner="waveDots" @infinite="infiniteScroll" :distance="500">
+    <infinite-loading spinner="waveDots" @infinite="infiniteScroll" :distance="50">
       <!-- slotでメッセージをカスタマイズできる -->
       <div slot="no-more"></div>
       <div slot="no-results"></div>
@@ -64,6 +62,9 @@
   </div>
 </template>
 <style scoped>
+.white-space-pre-inline{
+  white-space: pre-line;
+}
 .card-side-width{
   border-left-width: 3px !important;
 }
@@ -104,7 +105,6 @@ export default {
   props: ['searchQuery'],
   data() {
     return {
-      count: 20,
       cafes: [],
       page: 1,
       lat: undefined,
@@ -177,7 +177,7 @@ export default {
                               }
                             }
                           )
-      if(res.data.shops.length > 0){
+      if(res.data.shops.length > 0) {
         this.cafes.push(...res.data.shops)
         this.page++
         $state.loaded()
@@ -199,6 +199,7 @@ export default {
                             }
                           )
       this.cafes = res.data.shops
+      this.page = 2
     }
   }
 }

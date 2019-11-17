@@ -47,7 +47,7 @@
         <tbody>
           <tr v-if="cafe.business_hour">
             <td><v-icon style="font-size: 18px;">fas fa-clock</v-icon></td>
-            <td class="pl-0 body-2">{{ cafe.business_hour }}</td>
+            <td class="pl-0 body-2 white-space-pre-inline">{{ cafe.business_hour }}</td>
           </tr>
           <tr v-if="cafe.other_address">
             <td><v-icon style="font-size: 18px;">fas fa-map</v-icon></td>
@@ -77,7 +77,7 @@
       :zoom="15"
       map-type-id="terrain"
       style="max-width: 100%; height: 300px"
-      class="mb-5"
+      class="mb-2"
     >
       <GmapMarker
         :position="cafe_position"
@@ -88,6 +88,9 @@
   </div>
 </template>
 <style scoped>
+.white-space-pre-inline{
+  white-space: pre-line;
+}
 .have-not-facility{
   background-color: #E0E0E0 !important;
   color: #BDBDBD !important;

@@ -1,7 +1,9 @@
 <template>
   <div>
     <show-cafe />
-    <comment-form />
+    <section class="container">
+      <comment-form />
+    </section>
     <section class="container">
       <cafe-lists :searchQuery="searchQuery" />
     </section>

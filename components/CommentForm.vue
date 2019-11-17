@@ -1,10 +1,14 @@
 <template>
   <div>
-    <v-card outlined v-for="comment in comments" :key="comment.id">
-      <div class="mb-1 ml-1 overline" color="grey lighten-4">{{comment.name}}</div>
-      <v-card-text class="pt-1 pb-1" color="grey darken-4">{{comment.content}}</v-card-text>
+    <h3 class="subtitle-1 font-weight-black ml-n1">カフェについての投稿</h3>
+    <v-card outlined class="mb-1" v-for="comment in comments" :key="comment.id">
+      <div class="mb-0 ml-1 overline" color="grey lighten-4">{{comment.name}}</div>
+      <v-card-text class="pt-0 pb-1" color="grey darken-4">{{comment.content}}</v-card-text>
     </v-card>
-    <v-form ref="form" @submit.prevent="submit" class="ma-3">
+    <v-col class="text-center pa-0" v-if="more_read">
+      <v-btn text small center color="primary" @click="getMoreComments">もっと見る</v-btn>
+    </v-col>
+    <v-form ref="form" @submit.prevent="submit" class="my-3">
       <v-textarea
         outlined
         auto-grow
@@ -27,7 +31,7 @@
 <script>
 import axios from 'axios'
 const axiosPost = axios.create({
-    xsrfHeaderName: 'X-CSRF-Token'
+  xsrfHeaderName: 'X-CSRF-Token'
 })
 export default {
   data(){
@@ -35,7 +39,8 @@ export default {
       page: 1,
       name: '名無しさん',
       content: undefined,
-      comments: []
+      comments: [],
+      more_read: false
     }
   },
   async mounted() {
@@ -58,6 +63,8 @@ export default {
           shop_id: this.$nuxt.$route.params.id
         }
       })
+      this.content = ''
+      this.getComments()
     },
     async getComments(){
       const res = await axios.get(`https://hajiwata.com/api/shops/${this.$nuxt.$route.params.id}/comments?`,
@@ -67,9 +74,29 @@ export default {
           }
         }
       )
+      this.comments = res.data.comments
+      this.page++
+      if(this.page > res.data.page_num){
+        this.more_read = false
+      }else{
+        this.more_read = true
+      }
+    },
+    async getMoreComments(){
+      const res = await axios.get(`https://hajiwata.com/api/shops/${this.$nuxt.$route.params.id}/comments?`,
+        { params:
+          {
+            page: this.page
+          }
+        }
+      )
       this.comments.push(...res.data.comments)
       this.page++
-      this.content = ''
+      if(this.page > res.data.page_num){
+        this.more_read = false
+      }else{
+        this.more_read = true
+      }
     },
   }
 }

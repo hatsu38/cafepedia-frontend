@@ -1,7 +1,7 @@
 {
-  "name": "cafepedia-frontend",
+  "name": "cafepedia",
   "version": "1.0.0",
-  "description": "cafepedia's frontend project",
+  "description": "カフェペディアは、全国のカフェの設備情報サイトです。「Wi-Fi」「コンセント」「喫煙席」など設備に応じて気になるカフェを探すことが可能です。位置情報をONにすれば、すぐにあなたの近くにあるカフェもわかります。是非カフェ探しにご活用ください!",
   "author": "hatsu38 <hajiwata0308@gmail.com>",
   "private": true,
   "scripts": {

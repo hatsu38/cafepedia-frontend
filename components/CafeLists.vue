@@ -54,13 +54,25 @@
       <v-card-actions class="pt-0">
         <v-row class="d-flex justify-start" flat tile>
           <v-col cols="auto" justify="center">
-            <span class="group pa-1 pink lighten-1" small v-if="cafe.wifi">
+            <span
+              small
+              class="group pa-1"
+              :class="(cafe.wifi) ? 'have-wifi' : 'have-not-facility'"
+            >
               <v-icon small color="white">fas fa-wifi</v-icon>
             </span>
-            <span class="group indigo lighten-1 px-2 py-1" small v-if="cafe.socket">
+            <span
+              small
+              class="group px-2 py-1"
+              :class="(cafe.socket) ? 'have-socket' : 'have-not-facility'"
+            >
               <v-icon small color="white">fas fa-plug</v-icon>
             </span>
-            <span class="group pa-1 teal lighten-1" small v-if="cafe.smoking">
+            <span
+              small
+              class="group pa-1 teal lighten-1"
+              :class="(cafe.smoking) ? 'have-smoking' : 'have-not-facility'"
+            >
               <v-icon small color="white">fas fa-smoking</v-icon>
             </span>
           </v-col>

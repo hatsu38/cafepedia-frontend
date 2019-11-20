@@ -20,7 +20,8 @@ export default {
       searchQuery: {
         haveSocket: "",
         haveWifi: "",
-        haveSmoking: ""
+        haveSmoking: "",
+        stationName: ""
       }
     }
   },

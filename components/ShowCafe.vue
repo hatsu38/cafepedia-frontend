@@ -34,7 +34,7 @@
           :class="(cafe.socket) ? 'have-socket' : 'have-not-facility'"
         >
           <v-icon small class="mr-1" :class="(cafe.socket) ? 'have-socket' : 'have-not-facility'">fas fa-plug</v-icon>
-          コンセント
+          電源
         </v-chip>
         <v-chip
           :class="(cafe.smoking) ? 'have-smoking' : 'have-not-facility'"

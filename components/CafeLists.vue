@@ -1,23 +1,27 @@
 <template>
   <div class="cafe-lists">
     <v-btn
-      block
-      outlined
-      color="orange"
-      class="mb-3"
+      fixed
+      bottom
+      right
+      fab
+      color="orange lighten-2"
+      class="white--text"
       @click="clickUpdateLatLng"
       :class="{currentPositionGettingNow: currentPositionGettingNow}"
     >
-      <v-icon small class="mr-1">fas fa-map-marker-alt</v-icon>現在地を取得
+      <v-icon>fas fa-map-marker-alt</v-icon>
     </v-btn>
     <v-card v-for="cafe in cafes" :key="cafe.id"
       class="mb-4 card-side-width"
       outlined
       :class="cafe.main_shop_eng_name"
     >
-      <v-list-item three-line>
+      <v-list-item class="mt-3">
+          <img :src="`https://hajiwata.com/${cafe.image}`" width="48" height="48" tile class="mr-1">
+
         <v-list-item-content>
-          <v-list-item-title class="subtitle-1 mb-1" >
+          <v-list-item-subtitle style="white-space: normal;">
             <nuxt-link
               :to="{name:'cafes-id',
                     params:{id:cafe.id},
@@ -25,33 +29,33 @@
                             lng: lng,
                             socket: searchQuery.haveSocket,
                             wifi: searchQuery.havewifi,
-                            smoking: searchQuery.havesmoking
+                            smoking: searchQuery.havesmoking,
+                            station_name: searchQuery.stationName
                             }
                     }"
             >{{ cafe.name }}</nuxt-link>
-          </v-list-item-title>
-          <v-simple-table dense>
-            <tbody class="caption">
-              <tr>
-                <th class="pa-1 caption">
-                  <v-icon small class="pa-1">fas fa-map</v-icon>
-                </th>
-                <td class="pa-1 caption">
-                  {{cafe.prefecture}} {{cafe.city}} {{ cafe.other_address}}
-                </td>
-              </tr>
-              <tr>
-                <th class="pa-1 caption">
-                  <v-icon small style="padding: 4px 2px !important;">fas fa-clock</v-icon>
-                </th>
-                <td class="pa-1 caption white-space-pre-inline">{{cafe.business_hour}}</td>
-              </tr>
-            </tbody>
-          </v-simple-table>
+          </v-list-item-subtitle>
         </v-list-item-content>
-        <img :src="`https://hajiwata.com/${cafe.image}`" width="100" height="100" tile class="pt-3">
       </v-list-item>
-      <v-card-actions class="pt-0">
+      <v-list-item class="my-2 mb-n3">
+        <v-simple-table class="pb-0" style="width: 100%;">
+          <tbody class="caption">
+            <tr>
+              <th class="pa-0 caption">
+                <v-icon small class="pa-1">fas fa-map</v-icon>
+              </th>
+              <td class="pa-1 caption">{{cafe.prefecture}} {{cafe.city}} {{ cafe.other_address}}</td>
+            </tr>
+            <tr>
+              <th class="pa-0 caption">
+                <v-icon small class="pa-1">fas fa-clock</v-icon>
+              </th>
+              <td class="pa-1 caption white-space-pre-inline">{{cafe.business_hour}}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-list-item>
+      <v-card-actions class="px-4">
         <v-row class="d-flex justify-start" flat tile>
           <v-col cols="auto" justify="center">
             <span
@@ -238,6 +242,7 @@ export default {
                                 socket: this.searchQuery.haveSocket,
                                 wifi: this.searchQuery.haveWifi,
                                 smoking: this.searchQuery.haveSmoking,
+                                station_name: this.searchQuery.stationName,
                                 page: this.page
                               }
                             }
@@ -259,7 +264,8 @@ export default {
                                 lng: this.lng,
                                 socket: this.searchQuery.haveSocket,
                                 wifi: this.searchQuery.haveWifi,
-                                smoking: this.searchQuery.haveSmoking
+                                smoking: this.searchQuery.haveSmoking,
+                                station_name: this.searchQuery.stationName
                               }
                             }
                           )

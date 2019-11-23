@@ -11,30 +11,43 @@
     >
       <v-card-title class="py-1">
         <strong class="">SNS Share</strong>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn
+          v-for="sns in sns_buttons"
+          :key="sns.id"
           class="white--text"
           icon
-          v-for="sns in sns_buttons" :key="sns.id"
         >
-          <a :href="sns.link" target="_blank" :prefetch="false" rel="nofollow" class="white--text">
-            <v-icon>{{sns.icon}}</v-icon>
+          <a
+            :href="sns.link"
+            target="_blank"
+            :prefetch="false"
+            rel="nofollow"
+            class="white--text"
+          >
+            <v-icon>{{ sns.icon }}</v-icon>
           </a>
         </v-btn>
-        <v-divider></v-divider>
+        <v-divider />
       </v-card-title>
       <v-card-title class="py-1">
         <strong>Contact</strong>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <v-btn
           class="white--text"
           icon
         >
-          <a href="https://forms.gle/ETcw6uX9EjQhwo5m9" target="_blank" :prefetch="false" rel="nofollow" class="white--text">
+          <a
+            href="https://forms.gle/ETcw6uX9EjQhwo5m9"
+            target="_blank"
+            :prefetch="false"
+            rel="nofollow"
+            class="white--text"
+          >
             <v-icon>fas fa-envelope</v-icon>
           </a>
         </v-btn>
-        <v-divider></v-divider>
+        <v-divider />
         <v-card-text class="white--text">
           {{ new Date().getFullYear() }} — <strong>&copy; Cafepedia</strong>
         </v-card-text>

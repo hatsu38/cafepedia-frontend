@@ -6,7 +6,7 @@
       style="display:block"
       data-ad-format="fluid"
       data-ad-layout-key="-fb+5w+4e-db+86"
-      data-ad-client="ca-pub-1127095554868031"
+      data-ad-client=process.env.CAFEPEDIA_GOOGLE_ADSENSE
       data-ad-slot="6207636735"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});

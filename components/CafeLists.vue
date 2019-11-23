@@ -12,6 +12,7 @@
     >
       <v-icon>fas fa-map-marker-alt</v-icon>
     </v-btn>
+    <InfeedAdsense />
     <v-card v-for="cafe in cafes" :key="cafe.id"
       class="mb-4 card-side-width"
       outlined
@@ -138,7 +139,11 @@
 </style>
 <script>
 import axios from 'axios'
+import InfeedAdsense from '~/components/InfeedAdsense.vue'
 export default {
+  components: {
+    InfeedAdsense,
+  },
   props: ['searchQuery'],
   data() {
     return {

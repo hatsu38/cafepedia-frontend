@@ -3,12 +3,12 @@
     <v-card class="mx-auto">
       <v-list-item three-line>
         <v-list-item-content>
-          <v-list-item-subtitle
+          <h1
             class="subtitle-1 font-weight-black"
             style="line-height: 1.35; color: #4f4f4f;"
           >
             {{ cafe.name }}
-          </v-list-item-subtitle>
+          </h1>
         </v-list-item-content>
       </v-list-item>
       <v-card-text class=" pt-0 mt-n5">
@@ -75,9 +75,7 @@
                 fas fa-clock
               </v-icon>
             </td>
-            <td class="pl-0 body-2 white-space-pre-inline">
-              {{ cafe.business_hour }}
-            </td>
+            <td class="pl-0 body-2 white-space-pre-inline">{{ cafe.business_hour }}</td>
           </tr>
           <tr v-if="cafe.other_address">
             <td>
@@ -201,6 +199,34 @@ export default {
     this.cafe = res.data.shop
     this.cafe_position.lat = Number(this.cafe.lat)
     this.cafe_position.lng = Number(this.cafe.lng)
+  },
+  methods: {
+    createMetaDescription(cafe) {
+      const wifiText = cafe.wifi ? "Wi-Fiがある、" : ""
+      const socketText = cafe.socket ? "電源・コンセントがある" : ""
+      const smokingText = cafe.smoking ? "喫煙席もある" : ""
+      const stationText = this.$nuxt.$route.query.stationName ?  this.$nuxt.$route.query.stationName + "近くにある" : ""
+      const descrptionText =
+        wifiText +
+        socketText +
+        smokingText +
+        stationText +
+        cafe.main_shop_name +
+        "です。" +
+        cafe.prefecture +
+        cafe.city +
+        cafe.other_address +
+        "にあります。"
+      return descrptionText
+    }
+  },
+  head () {
+    return {
+      title: this.cafe.name + " | カフェぺディア | あなたの近くにあるカフェがすぐに見つかる",
+      meta: [
+        { hid: 'description', name: 'description', content: this.createMetaDescription(this.cafe) }
+      ]
+    }
   }
 }
 </script>

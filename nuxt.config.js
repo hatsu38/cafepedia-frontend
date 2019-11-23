@@ -81,6 +81,7 @@ module.exports = {
   modules: [
     "@nuxtjs/axios",
     '@nuxtjs/vuetify',
+    '@nuxtjs/sentry',
     ['@nuxtjs/sitemap'],
     ['@nuxtjs/google-analytics', { id: process.env.CAFEPEDIA_GA_ID}],
     ['@nuxtjs/google-gtag',{id: process.env.CAFEPDIA_NUXT_GTAG_ID}],
@@ -96,6 +97,12 @@ module.exports = {
       accent: '#8c9eff',
       error: '#b71c1c'
     },
+  },
+  sentry: {
+    dsn: 'https://eb1901656a8b4fcab01d35aea67ef851@sentry.io/1831661',
+    config: {
+      environments: [ "production" ]
+    }
   },
   sitemap: {
     path: '/sitemap.xml',

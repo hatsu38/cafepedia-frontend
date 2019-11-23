@@ -7,144 +7,203 @@
       fab
       color="orange lighten-2"
       class="white--text"
+      :class="{ currentPositionGettingNow: currentPositionGettingNow }"
       @click="clickUpdateLatLng"
-      :class="{currentPositionGettingNow: currentPositionGettingNow}"
     >
       <v-icon>fas fa-map-marker-alt</v-icon>
     </v-btn>
     <InfeedAdsense />
-    <v-card v-for="cafe in cafes" :key="cafe.id"
+    <v-card
+      v-for="cafe in cafes"
+      :key="cafe.id"
       class="mb-4 card-side-width"
       outlined
       :class="cafe.main_shop_eng_name"
     >
       <v-list-item class="mt-3">
-          <img :src="`https://hajiwata.com/${cafe.image}`" width="48" height="48" tile class="mr-1">
+        <img
+          :src="`https://hajiwata.com/${cafe.image}`"
+          width="48"
+          height="48"
+          tile
+          class="mr-1"
+        >
 
         <v-list-item-content>
           <v-list-item-subtitle style="white-space: normal;">
             <nuxt-link
-              :to="{name:'cafes-id',
-                    params:{id:cafe.id},
-                    query: {lat: lat,
-                            lng: lng,
-                            socket: searchQuery.haveSocket,
-                            wifi: searchQuery.havewifi,
-                            smoking: searchQuery.havesmoking,
-                            station_name: searchQuery.stationName
-                            }
-                    }"
-            >{{ cafe.name }}</nuxt-link>
+              :to="{
+                name: 'cafes-id',
+                params: { id: cafe.id },
+                query: {
+                  lat: lat,
+                  lng: lng,
+                  socket: searchQuery.haveSocket,
+                  wifi: searchQuery.havewifi,
+                  smoking: searchQuery.havesmoking,
+                  station_name: searchQuery.stationName
+                }
+              }"
+            >
+              {{ cafe.name }}
+            </nuxt-link>
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-list-item class="my-2 mb-n3">
-        <v-simple-table class="pb-0" style="width: 100%;">
+        <v-simple-table
+          class="pb-0"
+          style="width: 100%;"
+        >
           <tbody class="caption">
             <tr>
               <th class="pa-0 caption">
-                <v-icon small class="pa-1">fas fa-map</v-icon>
+                <v-icon
+                  small
+                  class="pa-1"
+                >
+                  fas fa-map
+                </v-icon>
               </th>
-              <td class="pa-1 caption">{{cafe.prefecture}} {{cafe.city}} {{ cafe.other_address}}</td>
+              <td class="pa-1 caption">
+                {{ cafe.access }}
+              </td>
             </tr>
             <tr>
               <th class="pa-0 caption">
-                <v-icon small class="pa-1">fas fa-clock</v-icon>
+                <v-icon
+                  small
+                  class="pa-1"
+                >
+                  fas fa-clock
+                </v-icon>
               </th>
-              <td class="pa-1 caption white-space-pre-inline">{{cafe.business_hour}}</td>
+              <td class="pa-1 caption white-space-pre-inline">
+                {{ cafe.business_hour }}
+              </td>
             </tr>
           </tbody>
         </v-simple-table>
       </v-list-item>
       <v-card-actions class="px-4">
-        <v-row class="d-flex justify-start" flat tile>
-          <v-col cols="auto" justify="center">
+        <v-row
+          class="d-flex justify-start"
+          flat
+          tile
+        >
+          <v-col
+            cols="auto"
+            justify="center"
+          >
             <span
               small
               class="group pa-1"
-              :class="(cafe.wifi) ? 'have-wifi' : 'have-not-facility'"
+              :class="cafe.wifi ? 'have-wifi' : 'have-not-facility'"
             >
-              <v-icon small color="white">fas fa-wifi</v-icon>
+              <v-icon
+                small
+                color="white"
+              >fas fa-wifi</v-icon>
             </span>
             <span
               small
               class="group px-2 py-1"
-              :class="(cafe.socket) ? 'have-socket' : 'have-not-facility'"
+              :class="cafe.socket ? 'have-socket' : 'have-not-facility'"
             >
-              <v-icon small color="white">fas fa-plug</v-icon>
+              <v-icon
+                small
+                color="white"
+              >fas fa-plug</v-icon>
             </span>
             <span
               small
               class="group pa-1 teal lighten-1"
-              :class="(cafe.smoking) ? 'have-smoking' : 'have-not-facility'"
+              :class="cafe.smoking ? 'have-smoking' : 'have-not-facility'"
             >
-              <v-icon small color="white">fas fa-smoking</v-icon>
+              <v-icon
+                small
+                color="white"
+              >fas fa-smoking</v-icon>
             </span>
           </v-col>
         </v-row>
         <v-col cols="auto">
-          <v-icon small class="mb-1">fas fa-location-arrow</v-icon>
-          <span class="title">{{cafe.distance}}</span>
+          <v-icon
+            small
+            class="mb-1"
+          >
+            fas fa-location-arrow
+          </v-icon>
+          <span class="title">{{ cafe.distance }}</span>
         </v-col>
       </v-card-actions>
     </v-card>
-    <infinite-loading spinner="waveDots" @infinite="infiniteScroll" :distance="50">
+    <infinite-loading
+      spinner="waveDots"
+      :distance="50"
+      @infinite="infiniteScroll"
+    >
       <!-- slotでメッセージをカスタマイズできる -->
-      <div slot="no-more"></div>
-      <div slot="no-results"></div>
+      <div slot="no-more" />
+      <div slot="no-results" />
     </infinite-loading>
   </div>
 </template>
 <style scoped>
-.currentPositionGettingNow{
-  background-color: #FF9100;
+.currentPositionGettingNow {
+  background-color: #ff9100;
   color: #ffffff !important;
 }
-.white-space-pre-inline{
+.white-space-pre-inline {
   white-space: pre-line;
 }
-.card-side-width{
+.card-side-width {
   border-left-width: 3px !important;
 }
 .starbacks {
-  border-left-color: #0A7042 !important;
+  border-left-color: #0a7042 !important;
 }
-.pronto{
-  border-left-color: #04483A !important;
+.pronto {
+  border-left-color: #04483a !important;
 }
 .tullys {
-  border-left-color: #B65900 !important;
+  border-left-color: #b65900 !important;
 }
 .doutor {
-  border-left-color: #F9CC21 !important;
+  border-left-color: #f9cc21 !important;
 }
-.kissa_renoir{
+.kissa_renoir {
   border-left-color: #000000 !important;
 }
-.komeda{
-  border-left-color: #0D2881 !important;
+.komeda {
+  border-left-color: #0d2881 !important;
 }
-.ueshima{
-  border-left-color: #723E32 !important;
+.ueshima {
+  border-left-color: #723e32 !important;
 }
-.newyorkers{
+.newyorkers {
   border-left-color: #070b3b !important;
 }
-.cafemiyama{
-  border-left-color: #F8931D !important;
+.cafemiyama {
+  border-left-color: #f8931d !important;
 }
-.myspace{
-  border-left-color: #7D5B2E !important;
+.myspace {
+  border-left-color: #7d5b2e !important;
 }
 </style>
 <script>
-import axios from 'axios'
-import InfeedAdsense from '~/components/InfeedAdsense.vue'
+import axios from "axios"
+import InfeedAdsense from "~/components/InfeedAdsense.vue"
 export default {
   components: {
-    InfeedAdsense,
+    InfeedAdsense
   },
-  props: ['searchQuery'],
+  props: {
+    searchQuery: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       cafes: [],
@@ -153,40 +212,8 @@ export default {
       lng: undefined,
       currentPositionGettingNow: false,
       geolocation_optoins: {
-        "enableHighAccuracy": true,
-        "maximumAge": 2000,
-      }
-    }
-  },
-  // 位置情報の取得を行う
-  async beforeMount() {
-    // URLから位置情報を取得
-    if (this.$nuxt.$route.query.lat && this.$nuxt.$route.query.lng){
-      this.updatePosition(
-        this.$nuxt.$route.query.lat, this.$nuxt.$route.query.lng
-      )
-    }
-    // URLがからのクエリから位置情報が取得できない
-    // && localStorageから取得できるとき
-    else if(localStorage.getItem("position")) {
-      try{
-        this.getStorage()
-      }
-      catch(error){
-        localStorage.removeItem('position')
-        const position = await this.getPosition()
-        this.updatePosition(position.coords.latitude, position.coords.longitude)
-      }
-    }
-    // URLからもlocalStorageでも取得できないとき
-    else {
-      try{
-        const position = await this.getPosition()
-        this.updatePosition(position.coords.latitude, position.coords.longitude)
-      }
-      catch(error){
-        alert("位置情報の取得に失敗しました"+error.message)
-        this.updatePosition(35.659328, 139.700553)
+        enableHighAccuracy: true,
+        maximumAge: 2000
       }
     }
   },
@@ -204,16 +231,57 @@ export default {
       this.setStorage()
     }
   },
+  // 位置情報の取得を行う
+  async beforeMount() {
+    // URLから位置情報を取得
+    if (this.$nuxt.$route.query.lat && this.$nuxt.$route.query.lng) {
+      this.updatePosition(
+        this.$nuxt.$route.query.lat,
+        this.$nuxt.$route.query.lng
+      )
+    }
+    // URLがからのクエリから位置情報が取得できない
+    // && localStorageから取得できるとき
+    else if (localStorage.getItem("position")) {
+      try {
+        this.getStorage()
+      } catch (error) {
+        localStorage.removeItem("position")
+        const position = await this.getPosition()
+        this.updatePosition(
+          position.coords.latitude,
+          position.coords.longitude
+        )
+      }
+    }
+    // URLからもlocalStorageでも取得できないとき
+    else {
+      try {
+        const position = await this.getPosition()
+        this.updatePosition(
+          position.coords.latitude,
+          position.coords.longitude
+        )
+      } catch (error) {
+        alert("位置情報の取得に失敗しました" + error.message)
+        this.updatePosition(35.659328, 139.700553)
+      }
+    }
+  },
   methods: {
     getPosition() {
       return new Promise((resolve, reject) => {
         // 位置情報がOnになっている時
-        if( navigator.geolocation ){
-          navigator.geolocation.getCurrentPosition(resolve, reject, this.geolocation_optoins);
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            resolve,
+            reject,
+            this.geolocation_optoins
+          )
         }
         // 位置情報がOffになっているとき
-        else{
-          alert( "あなたの端末では、現在位置を取得できません。" ) ;
+        else {
+          alert("あなたの端末では、現在位置を取得できません。")
         }
       })
     },
@@ -222,11 +290,13 @@ export default {
       this.currentPositionGettingNow = true
       try {
         const position = await this.getPosition()
-        this.updatePosition(position.coords.latitude, position.coords.longitude)
+        this.updatePosition(
+          position.coords.latitude,
+          position.coords.longitude
+        )
         this.searchFetch()
-      }
-      catch(error){
-        alert("位置情報の取得に失敗しました"+error.message)
+      } catch (error) {
+        alert("位置情報の取得に失敗しました" + error.message)
         this.updatePosition(35.659328, 139.700553)
         this.searchFetch()
       }
@@ -237,22 +307,19 @@ export default {
       this.lat = lat
       this.lng = lng
     },
-    async infiniteScroll($state){
-      const res = await axios.
-                        get('https://hajiwata.com/api/search?',
-                            { params:
-                              {
-                                lat: this.lat,
-                                lng: this.lng,
-                                socket: this.searchQuery.haveSocket,
-                                wifi: this.searchQuery.haveWifi,
-                                smoking: this.searchQuery.haveSmoking,
-                                station_name: this.searchQuery.stationName,
-                                page: this.page
-                              }
-                            }
-                          )
-      if(res.data.shops.length > 0) {
+    async infiniteScroll($state) {
+      const res = await axios.get("https://hajiwata.com/api/search?", {
+        params: {
+          lat: this.lat,
+          lng: this.lng,
+          socket: this.searchQuery.haveSocket,
+          wifi: this.searchQuery.haveWifi,
+          smoking: this.searchQuery.haveSmoking,
+          station_name: this.searchQuery.stationName,
+          page: this.page
+        }
+      })
+      if (res.data.shops.length > 0) {
         this.cafes.push(...res.data.shops)
         this.page++
         $state.loaded()
@@ -261,30 +328,25 @@ export default {
       }
     },
     async searchFetch() {
-      const res = await axios.
-                        get('https://hajiwata.com/api/search?',
-                            { params:
-                              {
-                                lat: this.lat,
-                                lng: this.lng,
-                                socket: this.searchQuery.haveSocket,
-                                wifi: this.searchQuery.haveWifi,
-                                smoking: this.searchQuery.haveSmoking,
-                                station_name: this.searchQuery.stationName
-                              }
-                            }
-                          )
+      const res = await axios.get("https://hajiwata.com/api/search?", {
+        params: {
+          lat: this.lat,
+          lng: this.lng,
+          socket: this.searchQuery.haveSocket,
+          wifi: this.searchQuery.haveWifi,
+          smoking: this.searchQuery.haveSmoking,
+          station_name: this.searchQuery.stationName
+        }
+      })
       this.cafes = res.data.shops
       this.page = 2
     },
-    setStorage(){
+    setStorage() {
       localStorage.removeItem("position")
-      const position = {"current_lat": this.lat, "current_lng": this.lng}
-      localStorage.setItem(
-        "position", JSON.stringify(position)
-      )
+      const position = { current_lat: this.lat, current_lng: this.lng }
+      localStorage.setItem("position", JSON.stringify(position))
     },
-    getStorage(){
+    getStorage() {
       const position = JSON.parse(localStorage.getItem("position"))
       this.updatePosition(position["current_lat"], position["current_lng"])
     }

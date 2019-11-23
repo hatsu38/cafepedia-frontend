@@ -6,16 +6,16 @@
     </section>
     <InfeedAdsense />
     <section class="container">
-      <cafe-lists :searchQuery="searchQuery" />
+      <cafe-lists :search-query="searchQuery" />
     </section>
   </div>
 </template>
 
 <script>
-import ShowCafe from '~/components/ShowCafe.vue'
-import CommentForm from '~/components/CommentForm.vue'
-import InfeedAdsense from '~/components/InfeedAdsense.vue'
-import CafeLists from '~/components/CafeLists.vue'
+import ShowCafe from "~/components/ShowCafe.vue"
+import CommentForm from "~/components/CommentForm.vue"
+import InfeedAdsense from "~/components/InfeedAdsense.vue"
+import CafeLists from "~/components/CafeLists.vue"
 export default {
   components: {
     ShowCafe,
@@ -31,6 +31,6 @@ export default {
         haveSmoking: this.$nuxt.$route.query.smoking
       }
     }
-  },
+  }
 }
 </script>

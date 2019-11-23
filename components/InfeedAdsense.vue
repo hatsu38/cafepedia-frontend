@@ -1,13 +1,17 @@
 <template>
   <div>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    />
     <ins
       class="adsbygoogle"
       style="display:block"
       data-ad-format="fluid"
       data-ad-layout-key="-fb+5w+4e-db+86"
-      data-ad-client=process.env.CAFEPEDIA_GOOGLE_ADSENSE
-      data-ad-slot="6207636735"></ins>
+      data-ad-client="process.env.CAFEPEDIA_GOOGLE_ADSENSE"
+      data-ad-slot="6207636735"
+    />
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>

@@ -8,7 +8,7 @@
 
 ``` bash
 # install dependencies
-$ yarn install # Or yarn install
+$ yarn install
 
 # serve with hot reload at localhost:3000
 $ yarn run dev

@@ -78,9 +78,7 @@
                   fas fa-clock
                 </v-icon>
               </th>
-              <td class="pa-1 caption white-space-pre-inline">
-                {{ cafe.business_hour }}
-              </td>
+              <td class="pa-1 caption white-space-pre-inline">{{ cafe.business_hour }}</td>
             </tr>
           </tbody>
         </v-simple-table>

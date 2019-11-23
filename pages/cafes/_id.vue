@@ -4,7 +4,6 @@
     <section class="container">
       <comment-form />
     </section>
-    <InfeedAdsense />
     <section class="container">
       <cafe-lists :search-query="searchQuery" />
     </section>
@@ -14,13 +13,11 @@
 <script>
 import ShowCafe from "~/components/ShowCafe.vue"
 import CommentForm from "~/components/CommentForm.vue"
-import InfeedAdsense from "~/components/InfeedAdsense.vue"
 import CafeLists from "~/components/CafeLists.vue"
 export default {
   components: {
     ShowCafe,
     CommentForm,
-    InfeedAdsense,
     CafeLists
   },
   data() {

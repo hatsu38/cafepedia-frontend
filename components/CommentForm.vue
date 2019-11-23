@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3 class="subtitle-1 font-weight-black ml-n1">
+    <h2 class="subtitle-1 font-weight-black ml-n1">
       カフェについての投稿
-    </h3>
+    </h2>
     <v-card
       v-for="comment in comments"
       :key="comment.id"

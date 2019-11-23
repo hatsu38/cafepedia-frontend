@@ -30,7 +30,10 @@
         >
 
         <v-list-item-content>
-          <v-list-item-subtitle style="white-space: normal;">
+          <h3
+            class="subtitle-2 font-weight-black"
+            style="white-space: normal;"
+          >
             <nuxt-link
               :to="{
                 name: 'cafes-id',
@@ -47,7 +50,7 @@
             >
               {{ cafe.name }}
             </nuxt-link>
-          </v-list-item-subtitle>
+          </h3>
         </v-list-item-content>
       </v-list-item>
       <v-list-item class="my-2 mb-n3">
@@ -57,30 +60,28 @@
         >
           <tbody class="caption">
             <tr>
-              <th class="pa-0 caption">
+              <td class="pa-0 caption text-center">
                 <v-icon
                   small
                   class="pa-1"
                 >
                   fas fa-map
                 </v-icon>
-              </th>
+              </td>
               <td class="pa-1 caption">
                 {{ cafe.access }}
               </td>
             </tr>
             <tr>
-              <th class="pa-0 caption">
+              <td class="pa-0 caption text-center">
                 <v-icon
                   small
                   class="pa-1"
                 >
                   fas fa-clock
                 </v-icon>
-              </th>
-              <td class="pa-1 caption white-space-pre-inline">
-                {{ cafe.business_hour }}
               </td>
+              <td class="pa-1 caption white-space-pre-inline">{{ cafe.business_hour }}</td>
             </tr>
           </tbody>
         </v-simple-table>

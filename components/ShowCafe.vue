@@ -21,10 +21,10 @@
             cols="auto"
             class="display-2 pa-0"
           >
-            <v-icon :class="cafe.main_shop_eng_name">
+            <v-icon :class="`${cafe.main_shop_eng_name}-title`">
               fas fa-location-arrow
             </v-icon>
-            <span :class="cafe.main_shop_eng_name">{{ cafe.distance }}</span>
+            <span :class="`${cafe.main_shop_eng_name}-title`">{{ cafe.distance }}</span>
           </v-col>
           <v-col cols="auto pa-0">
             <img
@@ -153,38 +153,6 @@
     </GmapMap>
   </div>
 </template>
-<style scoped>
-.starbacks {
-  color: #0a7042 !important;
-}
-.pronto {
-  color: #04483a !important;
-}
-.tullys {
-  color: #b65900 !important;
-}
-.doutor {
-  color: #f9cc21 !important;
-}
-.kissa_renoir {
-  color: #000000 !important;
-}
-.komeda {
-  color: #0d2881 !important;
-}
-.ueshima {
-  color: #723e32 !important;
-}
-.newyorkers {
-  color: #070b3b !important;
-}
-.cafemiyama {
-  color: #f8931d !important;
-}
-.myspace {
-  color: #7d5b2e !important;
-}
-</style>
 <script>
 import axios from "axios"
 export default {

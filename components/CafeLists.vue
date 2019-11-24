@@ -53,9 +53,75 @@
           </h3>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item class="my-2 mb-n3">
+      <v-card-actions class="px-5 py-0">
+        <v-row
+          class="d-flex justify-start"
+          flat
+          tile
+        >
+          <v-col
+            cols="auto"
+            justify="center"
+          >
+            <v-chip
+              small
+              class="group"
+              :class="cafe.wifi ? 'have-wifi' : 'have-not-facility'"
+            >
+              <v-icon
+                small
+                color="white"
+              >
+                fas fa-wifi
+              </v-icon>
+            </v-chip>
+            <v-chip
+              small
+              class="group px-4"
+              :class="cafe.socket ? 'have-socket' : 'have-not-facility'"
+            >
+              <v-icon
+                small
+                color="white"
+              >
+                fas fa-plug
+              </v-icon>
+            </v-chip>
+            <v-chip
+              small
+              class="group teal lighten-1"
+              :class="cafe.smoking ? 'have-smoking' : 'have-not-facility'"
+            >
+              <v-icon
+                small
+                color="white"
+              >
+                fas fa-smoking
+              </v-icon>
+            </v-chip>
+          </v-col>
+        </v-row>
+        <v-col
+          cols="auto"
+          :class="`${cafe.main_shop_eng_name}-title`"
+        >
+          <v-icon
+            small
+            class="mb-1"
+            :class="`${cafe.main_shop_eng_name}-title`"
+          >
+            fas fa-location-arrow
+          </v-icon>
+          <span
+            class="title"
+          >
+            {{ cafe.distance }}
+          </span>
+        </v-col>
+      </v-card-actions>
+      <v-list-item>
         <v-simple-table
-          class="pb-0"
+          class="my-1"
           style="width: 100%;"
         >
           <tbody class="caption">
@@ -68,9 +134,7 @@
                   fas fa-map
                 </v-icon>
               </td>
-              <td class="pa-1 caption">
-                {{ cafe.access }}
-              </td>
+              <td class="pa-1 caption">{{ cafe.access }}</td>
             </tr>
             <tr>
               <td class="pa-0 caption text-center">
@@ -86,58 +150,6 @@
           </tbody>
         </v-simple-table>
       </v-list-item>
-      <v-card-actions class="px-4">
-        <v-row
-          class="d-flex justify-start"
-          flat
-          tile
-        >
-          <v-col
-            cols="auto"
-            justify="center"
-          >
-            <span
-              small
-              class="group pa-1"
-              :class="cafe.wifi ? 'have-wifi' : 'have-not-facility'"
-            >
-              <v-icon
-                small
-                color="white"
-              >fas fa-wifi</v-icon>
-            </span>
-            <span
-              small
-              class="group px-2 py-1"
-              :class="cafe.socket ? 'have-socket' : 'have-not-facility'"
-            >
-              <v-icon
-                small
-                color="white"
-              >fas fa-plug</v-icon>
-            </span>
-            <span
-              small
-              class="group pa-1 teal lighten-1"
-              :class="cafe.smoking ? 'have-smoking' : 'have-not-facility'"
-            >
-              <v-icon
-                small
-                color="white"
-              >fas fa-smoking</v-icon>
-            </span>
-          </v-col>
-        </v-row>
-        <v-col cols="auto">
-          <v-icon
-            small
-            class="mb-1"
-          >
-            fas fa-location-arrow
-          </v-icon>
-          <span class="title">{{ cafe.distance }}</span>
-        </v-col>
-      </v-card-actions>
     </v-card>
     <infinite-loading
       spinner="waveDots"

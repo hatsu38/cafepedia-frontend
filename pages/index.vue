@@ -2,21 +2,21 @@
   <section class="container">
     <div>
       <search-form :search-query="searchQuery" />
-      <infeed-adsense />
+      <top-display-responsive-square-adsense />
       <cafe-lists :search-query="searchQuery" />
-      <infeed-adsense />
+      <top-display-responsive-square-adsense />
     </div>
   </section>
 </template>
 
 <script>
 import SearchForm from "~/components/SearchForm.vue"
-import InfeedAdsense from "~/components/InfeedAdsense.vue"
+import TopDisplayResponsiveSquareAdsense from "~/components/TopDisplayResponsiveSquareAdsense.vue"
 import CafeLists from "~/components/CafeLists.vue"
 export default {
   components: {
     SearchForm,
-    InfeedAdsense,
+    TopDisplayResponsiveSquareAdsense,
     CafeLists
   },
   data() {

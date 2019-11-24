@@ -4,7 +4,7 @@
     <section class="container">
       <comment-form />
     </section>
-    <InfeedAdsense />
+    <infeed-adsense />
     <section class="container">
       <cafe-lists :search-query="searchQuery" />
     </section>

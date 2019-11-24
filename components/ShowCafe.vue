@@ -160,10 +160,11 @@
       />
     </GmapMap>
     <a
-      :href="`comgooglemaps://?daddr=${cafe_position.lat},${cafe_position.lng}`"
+      :href="`https://www.google.com/maps/search/?api=1&query=${cafe.prefecture }${ cafe.city }${ cafe.other_address}`"
       class="caption d-flex d-sm-none"
+      target="_blank"
     >
-      地図アプリで見る
+      地図を見る
     </a>
   </div>
 </template>

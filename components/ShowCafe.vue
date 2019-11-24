@@ -129,9 +129,17 @@
           </tr>
         </tbody>
       </v-simple-table>
-      <p class="mb-0 mx-2 pb-2 text-right body-2">
-        <a :href=editUrlRequest(cafe) target='_blank'>
-          <v-icon style="font-size: 14px;" color="blue darken-2">
+      <p
+        class="mb-0 mx-2 pb-2 text-right body-2"
+      >
+        <a
+          :href="editUrlRequest(cafe)"
+          target="_blank"
+        >
+          <v-icon
+            color="blue darken-2"
+            style="font-size: 14px;"
+          >
             fas fa-external-link-alt
           </v-icon>
           情報の修正を提案
@@ -151,6 +159,12 @@
         :draggable="true"
       />
     </GmapMap>
+    <a
+      :href="`comgooglemaps://?daddr=${cafe_position.lat},${cafe_position.lng}`"
+      class="caption d-flex d-sm-none"
+    >
+      地図アプリで見る
+    </a>
   </div>
 </template>
 <script>

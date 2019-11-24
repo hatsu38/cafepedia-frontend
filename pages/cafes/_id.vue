@@ -4,7 +4,7 @@
     <section class="container">
       <comment-form />
     </section>
-    <infeed-adsense />
+    <top-display-responsive-square-adsense />
     <section class="container">
       <cafe-lists :search-query="searchQuery" />
     </section>
@@ -14,13 +14,13 @@
 <script>
 import ShowCafe from "~/components/ShowCafe.vue"
 import CommentForm from "~/components/CommentForm.vue"
-import InfeedAdsense from "~/components/InfeedAdsense.vue"
+import TopDisplayResponsiveSquareAdsense from "~/components/TopDisplayResponsiveSquareAdsense.vue"
 import CafeLists from "~/components/CafeLists.vue"
 export default {
   components: {
     ShowCafe,
     CommentForm,
-    InfeedAdsense,
+    TopDisplayResponsiveSquareAdsense,
     CafeLists
   },
   data() {

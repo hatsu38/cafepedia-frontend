@@ -67,7 +67,7 @@
           喫煙席
         </v-chip>
       </v-card-text>
-      <v-simple-table class="mb-n3">
+      <v-simple-table class="mb-n1">
         <tbody>
           <tr v-if="cafe.business_hour">
             <td>

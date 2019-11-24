@@ -35,7 +35,7 @@
           </v-col>
         </v-row>
       </v-card-text>
-      <v-card-text class="px-1">
+      <v-card-text class="px-1 pb-2">
         <v-chip :class="cafe.wifi ? 'have-wifi' : 'have-not-facility'">
           <v-icon
             small
@@ -67,7 +67,7 @@
           喫煙席
         </v-chip>
       </v-card-text>
-      <v-simple-table>
+      <v-simple-table class="mb-n1">
         <tbody>
           <tr v-if="cafe.business_hour">
             <td>
@@ -100,7 +100,7 @@
           <tr v-if="cafe.hp">
             <td>
               <v-icon style="font-size: 18px;">
-                fas fa-external-link-alt
+                fas fa-link
               </v-icon>
             </td>
             <td class="pl-0 body-2">
@@ -129,6 +129,14 @@
           </tr>
         </tbody>
       </v-simple-table>
+      <p class="mb-0 mx-2 pb-2 text-right body-2">
+        <a :href=editUrlRequest(cafe) target='_blank'>
+          <v-icon style="font-size: 14px;" color="blue darken-2">
+            fas fa-external-link-alt
+          </v-icon>
+          情報の修正を提案
+        </a>
+      </p>
     </v-card>
     <GmapMap
       :center="cafe_position"
@@ -151,7 +159,8 @@ export default {
   data() {
     return {
       cafe: [],
-      cafe_position: { lat: 35.71, lng: 139.72 }
+      cafe_position: { lat: 35.71, lng: 139.72 },
+      editRequestUrl: undefined
     }
   },
   async created() {
@@ -186,7 +195,32 @@ export default {
         cafe.other_address +
         "にあります。"
       return descrptionText
-    }
+    },
+    editUrlRequest(cafe) {
+      const cafeName = "entry.537099549=" + cafe.name,
+            cafeAddress = cafe.other_address ? "&entry.1935919079="+cafe.prefecture+cafe.city+cafe.other_address : "",
+            cafeAccess = cafe.access ? "&entry.639648788="+cafe.access : "",
+            cafeTel = cafe.tel ? "&entry.361805782="+cafe.tel : "",
+            cafeBusinessHour = cafe.business_hour ? "&entry.1300411853="+cafe.business_hour : "",
+            cafeChair = cafe.chair ? "&entry.1986662663=" + cafe.chair : "",
+            cafeUrl = cafe.url ? "&entry.376343537=" + cafe.url : "",
+            cafeWifi = cafe.wifi ? "&entry.1484239701=Wi-Fiが使えます" : "",
+            cafeSocket = cafe.socket ? "&entry.189878129=コンセントが使えます" : "",
+            cafeSmoking = cafe.smoking ? "&entry.625872371=喫煙席があります" : ""
+      const googleForm = "https://docs.google.com/forms/d/e/1FAIpQLSdkTXNrlKD-6fFP7EvBwU0DqqiWR_7J_4LAO6Igs-_7KyxiMw/viewform?usp=sf_link&"
+      const googleURL = googleForm +
+                        cafeName +
+                        cafeAddress +
+                        cafeAccess +
+                        cafeTel +
+                        cafeBusinessHour +
+                        cafeChair +
+                        cafeUrl +
+                        cafeWifi +
+                        cafeSocket +
+                        cafeSmoking
+      return googleURL
+    },
   },
   head () {
     return {

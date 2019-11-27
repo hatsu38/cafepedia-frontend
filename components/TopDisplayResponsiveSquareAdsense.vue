@@ -11,7 +11,7 @@
       data-ad-client="ca-pub-1127095554868031"
       data-ad-slot="1832636826"
       data-ad-format="auto"
-      data-full-width-responsive="true"
+      data-full-width-responsive="false"
     ></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});

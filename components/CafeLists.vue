@@ -1,17 +1,52 @@
 <template>
   <div class="cafe-lists">
-    <v-btn
-      fixed
-      bottom
-      right
-      fab
-      color="orange lighten-2"
-      class="white--text"
-      :class="{ currentPositionGettingNow: currentPositionGettingNow }"
-      @click="clickUpdateLatLng"
+    <v-dialog
+      v-model="dialog"
+      max-width="290"
     >
-      <v-icon>fas fa-map-marker-alt</v-icon>
-    </v-btn>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          fixed
+          bottom
+          right
+          fab
+          color="orange lighten-2"
+          class="white--text currentPositionGettingNow"
+          v-on="on"
+          @click.stop='dialog=true'
+        >
+          <v-icon>fas fa-map-marker-alt</v-icon>
+        </v-btn>
+      </template>
+      <v-card>
+        <v-card-title class="body-1">
+          位置情報から近い順にカフェを取得しますか？
+        </v-card-title>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog=false"
+          >
+            いいえ
+          </v-btn>
+          <v-btn
+            color="green darken-1"
+            text
+            @click="dialog=false; clickUpdateLatLng();"
+          >
+            はい
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-progress-linear
+      v-if="nowSearching"
+      indeterminate
+      color="blue darken-1"
+      class="mb-1"
+    />
     <v-card
       v-for="cafe in cafes"
       :key="cafe.id"
@@ -27,7 +62,6 @@
           tile
           class="mr-1"
         >
-
         <v-list-item-content>
           <h3
             class="subtitle-2 font-weight-black"
@@ -155,7 +189,6 @@
       :distance="50"
       @infinite="infiniteScroll"
     >
-      <!-- slotでメッセージをカスタマイズできる -->
       <div slot="no-more" />
       <div slot="no-results" />
     </infinite-loading>
@@ -218,7 +251,8 @@ export default {
       page: 1,
       lat: undefined,
       lng: undefined,
-      currentPositionGettingNow: false,
+      dialog: false,
+      nowSearching: false,
       geolocation_optoins: {
         enableHighAccuracy: true,
         maximumAge: 2000
@@ -294,8 +328,6 @@ export default {
       })
     },
     async clickUpdateLatLng() {
-      // 現在地取得(取得中はcurrentPositionGettingNow クラスをつける)
-      this.currentPositionGettingNow = true
       try {
         const position = await this.getPosition()
         this.updatePosition(
@@ -308,8 +340,6 @@ export default {
         this.updatePosition(35.659328, 139.700553)
         this.searchFetch()
       }
-      // 現在地取得(取得中後はcurrentPositionGettingNow クラスを外す)
-      this.currentPositionGettingNow = false
     },
     updatePosition(lat, lng) {
       this.lat = lat
@@ -336,6 +366,7 @@ export default {
       }
     },
     async searchFetch() {
+      this.nowSearching = true
       const res = await axios.get("https://hajiwata.com/api/search?", {
         params: {
           lat: this.lat,
@@ -347,6 +378,7 @@ export default {
         }
       })
       this.cafes = res.data.shops
+      this.nowSearching = false
       this.page = 2
     },
     setStorage() {

@@ -28,7 +28,7 @@
           </v-col>
           <v-col cols="auto pa-0">
             <img
-              :src="`https://hajiwata.com/${cafe.image}`"
+              :src="`https://api.cafepedia.jp/${cafe.image}`"
               width="90"
               height="90"
             >
@@ -187,7 +187,7 @@ export default {
       lng: this.$nuxt.$route.query.lng
     }
     const res = await axios.get(
-      `https://hajiwata.com/api/shops/${this.$nuxt.$route.params.id}`,
+      `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}`,
       { params: query }
     )
     this.cafe = res.data.shop

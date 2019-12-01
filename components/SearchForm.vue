@@ -183,7 +183,7 @@ export default {
         this.stations = []
       } else {
         const res = await axios.get(
-          "https://hajiwata.com/api/stations/search?",
+          "https://api.cafepedia.jp/api/stations/search?",
           {
             params: { word: this.word, page: this.page }
           }

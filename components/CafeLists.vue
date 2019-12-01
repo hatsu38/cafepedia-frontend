@@ -56,7 +56,7 @@
     >
       <v-list-item class="mt-3">
         <img
-          :src="`https://hajiwata.com/${cafe.image}`"
+          :src="`https://api.cafepedia.jp/${cafe.image}`"
           width="48"
           height="48"
           tile
@@ -346,7 +346,7 @@ export default {
       this.lng = lng
     },
     async infiniteScroll($state) {
-      const res = await axios.get("https://hajiwata.com/api/search?", {
+      const res = await axios.get("https://api.cafepedia.jp/api/search?", {
         params: {
           lat: this.lat,
           lng: this.lng,
@@ -367,7 +367,7 @@ export default {
     },
     async searchFetch() {
       this.nowSearching = true
-      const res = await axios.get("https://hajiwata.com/api/search?", {
+      const res = await axios.get("https://api.cafepedia.jp/api/search?", {
         params: {
           lat: this.lat,
           lng: this.lng,

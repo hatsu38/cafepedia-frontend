@@ -1,6 +1,10 @@
 <template>
   <div>
-    <v-card class="mx-auto">
+    <v-card
+      outlined
+      max-width=700
+      class="mx-auto"
+    >
       <v-list-item three-line>
         <v-list-item-content>
           <h1
@@ -151,8 +155,8 @@
       :center="cafe_position"
       :zoom="15"
       map-type-id="terrain"
-      style="max-width: 100%; height: 300px"
-      class="mb-2"
+      style="width: 100%; height: 300px; max-width:700px;"
+      class="mb-2 mx-auto"
     >
       <GmapMarker
         :position="cafe_position"

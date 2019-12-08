@@ -47,11 +47,22 @@
       color="blue darken-1"
       class="mb-1"
     />
+    <v-alert
+      dense
+      color="cyan"
+      border="left"
+      elevation="1"
+      type="info"
+      colored-border
+    >
+      {{ cafes.length }}/<strong>{{ totalShopsCount }}</strong> 店舗表示しています
+    </v-alert>
     <v-card
       v-for="cafe in cafes"
       :key="cafe.id"
       class="mb-4 card-side-width"
       outlined
+      elevation="3"
       :class="cafe.main_shop_eng_name"
     >
       <v-list-item class="mt-3">
@@ -252,6 +263,7 @@ export default {
       lat: undefined,
       lng: undefined,
       dialog: false,
+      totalShopsCount: undefined,
       nowSearching: false,
       geolocation_optoins: {
         enableHighAccuracy: true,
@@ -357,6 +369,7 @@ export default {
           page: this.page
         }
       })
+      this.totalShopsCount = res.data.shop_num
       if (res.data.shops.length > 0) {
         this.cafes.push(...res.data.shops)
         this.page++
@@ -377,6 +390,7 @@ export default {
           station_name: this.searchQuery.stationName
         }
       })
+      this.totalShopsCount = res.data.shop_num
       this.cafes = res.data.shops
       this.nowSearching = false
       this.page = 2

@@ -11,6 +11,12 @@
 </template>
 
 <style>
+body div, body button{
+  font-family: 'Noto Sans', sans-serif;
+}
+.container{
+  max-width: 700px;
+}
 a {
   text-decoration: none;
 }

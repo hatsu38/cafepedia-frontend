@@ -121,8 +121,9 @@ module.exports = {
   modules: [
     "@nuxtjs/axios",
     "@nuxtjs/vuetify",
+    'nuxt-webfontloader',
     "@nuxtjs/sentry",
-    ["@nuxtjs/sitemap"],
+    "@nuxtjs/sitemap",
     ["@nuxtjs/google-analytics", { id: process.env.CAFEPEDIA_GA_ID }],
     ["@nuxtjs/google-gtag", { id: process.env.CAFEPDIA_NUXT_GTAG_ID }],
     ["@nuxtjs/google-adsense", { id: process.env.CAFEPEDIA_GOOGLE_ADSENSE }]
@@ -135,6 +136,11 @@ module.exports = {
       secondary: "#b0bec5",
       accent: "#8c9eff",
       error: "#b71c1c"
+    }
+  },
+  webfontloader: {
+    google: {
+      families: ['Noto+Sans']
     }
   },
   sentry: {

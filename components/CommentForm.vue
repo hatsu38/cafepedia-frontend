@@ -88,7 +88,7 @@ export default {
   methods: {
     async submit() {
       await axiosPost.post(
-        `https://hajiwata.com/api/shops/${this.$nuxt.$route.params.id}/comments`,
+        `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/comments`,
         {
           comment: {
             content: this.content,
@@ -103,7 +103,7 @@ export default {
     },
     async getComments() {
       const res = await axios.get(
-        `https://hajiwata.com/api/shops/${this.$nuxt.$route.params.id}/comments?`,
+        `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/comments?`,
         {
           params: {
             page: this.page
@@ -120,7 +120,7 @@ export default {
     },
     async getMoreComments() {
       const res = await axios.get(
-        `https://hajiwata.com/api/shops/${this.$nuxt.$route.params.id}/comments?`,
+        `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/comments?`,
         {
           params: {
             page: this.page

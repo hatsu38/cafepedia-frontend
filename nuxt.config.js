@@ -7,7 +7,7 @@ const baseName = "カフェぺディア | あなたの近くにあるカフェ�
 const baseDesc =
   "カフェペディアは、全国のカフェの設備情報サイトです。「Wi-Fi」「コンセント」「喫煙席」など設備に応じて気になるカフェを探すことが可能です。位置情報をONにすれば、すぐにあなたの近くにあるカフェもわかります。是非カフェ探しにご活用ください!"
 const baseUrl = "https://cafepedia.jp/"
-const baseOgp = "https://hajiwata.com/images/ogp_img.png"
+const baseOgp = "https://api.cafepedia.jp/images/ogp_img.png"
 
 module.exports = {
   /*

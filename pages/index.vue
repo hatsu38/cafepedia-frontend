@@ -2,7 +2,6 @@
   <section class="container">
     <div>
       <search-form :search-query="searchQuery" />
-      <top-display-responsive-square-adsense />
       <cafe-lists :search-query="searchQuery" />
       <top-display-responsive-square-adsense />
     </div>

@@ -181,6 +181,7 @@ export default {
     async searchStation() {
       if (this.word.length <= 1) {
         this.stations = []
+        this.searchQuery.stationName = ""
       } else {
         const res = await axios.get(
           "https://api.cafepedia.jp/api/stations/search?",

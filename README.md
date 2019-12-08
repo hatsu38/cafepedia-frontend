@@ -1,8 +1,12 @@
 # cafepedia-frontend
+> cafepedia's frontend project
 
 ![Demo](https://raw.githubusercontent.com/wiki/hatsu38/cafepedia-frontend/img/cafepedia-readme.gif)
 
-> cafepedia's frontend project
+## Related repositories
+API：https://github.com/hatsu38/cafepedia-api/
+
+
 
 ## Build Setup
 

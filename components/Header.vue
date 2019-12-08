@@ -2,8 +2,8 @@
   <div>
     <v-toolbar
       flat
-      color="brown darken-3"
-      class="white--text"
+      color="brown darken-1"
+      dense
     >
       <v-toolbar-title>
         <nuxt-link

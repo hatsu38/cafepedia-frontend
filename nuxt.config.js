@@ -3,6 +3,8 @@ const { GOOGLE_MAP_API_KEY } = process.env
 const { CAFEPEDIA_GA_ID } = process.env
 const { CAFEPDIA_NUXT_GTAG_ID } = process.env
 const { CAFEPEDIA_GOOGLE_ADSENSE } = process.env
+const { CAFEPEDIA_LOG_ROCKET_ID } = process.env
+
 const baseName = "カフェぺディア | あなたの近くにあるカフェがすぐに見つかる"
 const baseDesc =
   "カフェペディアは、全国のカフェの設備情報サイトです。「Wi-Fi」「コンセント」「喫煙席」など設備に応じて気になるカフェを探すことが可能です。位置情報をONにすれば、すぐにあなたの近くにあるカフェもわかります。是非カフェ探しにご活用ください!"
@@ -110,7 +112,8 @@ module.exports = {
     GOOGLE_MAP_API_KEY,
     CAFEPEDIA_GA_ID,
     CAFEPDIA_NUXT_GTAG_ID,
-    CAFEPEDIA_GOOGLE_ADSENSE
+    CAFEPEDIA_GOOGLE_ADSENSE,
+    CAFEPEDIA_LOG_ROCKET_ID
   },
   plugins: [
     { src: "~/plugins/vue2-google-maps", ssr: false },
@@ -122,6 +125,7 @@ module.exports = {
     "@nuxtjs/axios",
     "@nuxtjs/vuetify",
     'nuxt-webfontloader',
+    'nuxt-logrocket',
     "@nuxtjs/sentry",
     "@nuxtjs/sitemap",
     ["@nuxtjs/google-analytics", { id: process.env.CAFEPEDIA_GA_ID }],
@@ -135,7 +139,8 @@ module.exports = {
       primary: "#3f51b5",
       secondary: "#b0bec5",
       accent: "#8c9eff",
-      error: "#b71c1c"
+      error: "#b71c1c",
+      dark: false
     },
     icons: {
       iconfont: 'fa'
@@ -145,6 +150,10 @@ module.exports = {
     google: {
       families: ['Noto+Sans']
     }
+  },
+  logRocket: {
+    logRocketId: process.env.CAFEPEDIA_LOG_ROCKET_ID,
+    devModeAllowed: false,
   },
   sentry: {
     dsn: "https://eb1901656a8b4fcab01d35aea67ef851@sentry.io/1831661",

@@ -139,7 +139,8 @@
         <a
           :href="editUrlRequest(cafe)"
           target="_blank"
-          rel="nofollow"
+          rel="noopener"
+          aria-label="edit info request"
         >
           <v-icon
             color="blue darken-2"
@@ -168,7 +169,7 @@
       :href="`https://www.google.com/maps/search/?api=1&query=${cafe.prefecture }${ cafe.city }${ cafe.other_address}`"
       class="caption d-flex d-sm-none"
       target="_blank"
-      rel="nofollow"
+      rel="noopener"
     >
       地図を見る
     </a>

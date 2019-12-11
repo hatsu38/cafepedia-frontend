@@ -17,13 +17,16 @@
           :key="sns.id"
           class="white--text"
           icon
+          :aria-label="sns.name"
+          :title="sns.name"
         >
           <a
             :href="sns.link"
             target="_blank"
             :prefetch="false"
-            rel="nofollow"
+            rel="noopener"
             class="white--text"
+            :aria-label="sns.name"
           >
             <v-icon>{{ sns.icon }}</v-icon>
           </a>
@@ -36,13 +39,16 @@
         <v-btn
           class="white--text"
           icon
+          aria-label="contact form"
+          title="contact form"
         >
           <a
             href="https://forms.gle/ETcw6uX9EjQhwo5m9"
             target="_blank"
             :prefetch="false"
-            rel="nofollow"
+            rel="noopener"
             class="white--text"
+            aria-label="contact form"
           >
             <v-icon>fas fa-envelope</v-icon>
           </a>
@@ -63,14 +69,17 @@ export default {
       sns_buttons: {
         twitter: {
           icon: "fab fa-twitter",
+          name: "twitter",
           link: `https://twitter.com/intent/tweet?url=${cafepediaURL}&text=カフェぺディア | あなたの近くにあるカフェがすぐに見つかる&hashtags=カフェペディア`
         },
         facebook: {
           icon: "fab fa-facebook",
+          name: "facebook",
           link: `https://www.facebook.com/sharer/sharer.php?u=${cafepediaURL}`
         },
         line: {
           icon: "fab fa-line",
+          name: "line",
           link: `https://line.me/R/msg/text/?${cafepediaURL}`
         }
       }

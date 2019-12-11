@@ -32,7 +32,7 @@ a {
   color: #ffffff !important;
 }
 .have-wifi {
-  background-color: #ec407a !important;
+  background-color: #ad1457 !important;
   color: #ffffff !important;
 }
 .have-socket {
@@ -73,6 +73,7 @@ a {
 <script>
 import Header from "~/components/Header.vue"
 import Footer from "~/components/Footer.vue"
+import '@fortawesome/fontawesome-free/css/all.css'
 export default {
   components: {
     Header,

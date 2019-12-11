@@ -15,6 +15,9 @@ module.exports = {
    */
   head: {
     title: baseName,
+    htmlAttrs: {
+      lang: 'ja'
+    },
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -30,10 +33,6 @@ module.exports = {
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicons/favicon.ico" },
-      {
-        rel: "stylesheet",
-        href: "https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-      },
       { rel: "manifest", href: "/favicons/manifest.json" },
       {
         rel: "apple-touch-icon",
@@ -119,6 +118,7 @@ module.exports = {
   ],
   vendor: ["vue2-google-maps"],
   modules: [
+    'nuxt-fontawesome',
     "@nuxtjs/axios",
     "@nuxtjs/vuetify",
     'nuxt-webfontloader',
@@ -136,6 +136,9 @@ module.exports = {
       secondary: "#b0bec5",
       accent: "#8c9eff",
       error: "#b71c1c"
+    },
+    icons: {
+      iconfont: 'fa'
     }
   },
   webfontloader: {

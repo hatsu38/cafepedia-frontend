@@ -14,6 +14,8 @@
           class="white--text currentPositionGettingNow"
           v-on="on"
           @click.stop='dialog=true'
+          aria-label="get current position"
+          title="get current position"
         >
           <v-icon>fas fa-map-marker-alt</v-icon>
         </v-btn>
@@ -68,8 +70,8 @@
       <v-list-item class="mt-3">
         <img
           :src="`https://api.cafepedia.jp/${cafe.image}`"
+          :alt="cafe.main_shop_eng_name"
           width="48"
-          height="48"
           tile
           class="mr-1"
         >
@@ -147,7 +149,6 @@
         </v-row>
         <v-col
           cols="auto"
-          :class="`${cafe.main_shop_eng_name}-title`"
         >
           <v-icon
             small
@@ -157,6 +158,7 @@
             fas fa-location-arrow
           </v-icon>
           <span
+            :class="`${cafe.main_shop_eng_name}-title`"
             class="title"
           >
             {{ cafe.distance }}
@@ -208,7 +210,6 @@
 <style scoped>
 .currentPositionGettingNow {
   background-color: #ff9100;
-  color: #ffffff !important;
 }
 .white-space-pre-inline {
   white-space: pre-line;

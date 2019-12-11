@@ -311,16 +311,7 @@ export default {
     }
     // URLからもlocalStorageでも取得できないとき
     else {
-      try {
-        const position = await this.getPosition()
-        this.updatePosition(
-          position.coords.latitude,
-          position.coords.longitude
-        )
-      } catch (error) {
-        alert("位置情報の取得に失敗しました" + error.message)
-        this.updatePosition(35.659328, 139.700553)
-      }
+      this.updatePosition(35.659328, 139.700553)
     }
   },
   methods: {

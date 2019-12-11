@@ -7,7 +7,6 @@
     </div>
   </section>
 </template>
-
 <script>
 import SearchForm from "~/components/SearchForm.vue"
 import TopDisplayResponsiveSquareAdsense from "~/components/TopDisplayResponsiveSquareAdsense.vue"

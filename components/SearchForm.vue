@@ -8,7 +8,7 @@
       >
         <v-btn
           outlined
-          color="pink darken-1"
+          color="pink"
           :class="{ wifiFilterOn: searchQuery.haveWifi }"
           @click="wifiFilter"
         >
@@ -48,7 +48,7 @@
       >
         <v-btn
           outlined
-          color="teal darken-4"
+          color="teal"
           :class="{ smokingFilterOn: searchQuery.haveSmoking }"
           @click="smokingFilter"
         >

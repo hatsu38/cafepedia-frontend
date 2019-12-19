@@ -12,10 +12,10 @@
           fab
           color="orange lighten-2"
           class="white--text currentPositionGettingNow"
-          v-on="on"
-          @click.stop='dialog=true'
           aria-label="get current position"
           title="get current position"
+          @click.stop="dialog=true"
+          v-on="on"
         >
           <v-icon>fas fa-map-marker-alt</v-icon>
         </v-btn>
@@ -192,6 +192,48 @@
                 </v-icon>
               </td>
               <td class="pa-1 caption white-space-pre-inline">{{ cafe.business_hour }}</td>
+            </tr>
+            <tr v-if="cafe.congrestion_info">
+              <td
+                class="pa-0 caption text-center"
+                width="35"
+              >
+                混雑状況
+              </td>
+              <td
+                class="pa-1 caption white-space-pre-inline"
+              >
+                <div
+                  v-if="cafe.congrestion_info==1"
+                >
+                  <img
+                    v-for="index in cafe.congrestion_info*2"
+                    :key="index"
+                    src="~/assets/vacant.png"
+                    width="35"
+                  >
+                </div>
+                <div
+                  v-if="cafe.congrestion_info==2"
+                >
+                  <img
+                    v-for="index in cafe.congrestion_info*2"
+                    :key="index"
+                    src="~/assets/little_crowded.png"
+                    width="35"
+                  >
+                </div>
+                <div
+                  v-if="cafe.congrestion_info==3"
+                >
+                  <img
+                    v-for="index in cafe.congrestion_info*2"
+                    :key="index"
+                    src="~/assets/crowded.png"
+                    width="35"
+                  >
+                </div>
+              </td>
             </tr>
           </tbody>
         </v-simple-table>

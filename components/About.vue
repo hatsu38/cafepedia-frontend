@@ -10,8 +10,7 @@
           :src="`https://api.cafepedia.jp/${cafe.image}`"
           class="white--text align-end"
           height="40px"
-        >
-        </v-img>
+        />
       </v-card>
     </v-col>
   </v-row>

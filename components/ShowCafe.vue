@@ -231,7 +231,7 @@
           color="success"
           text
           buttom
-          @click="del_submit(congrestionType)"
+          @click="del_submit(shopCongrestionInfoId)"
         >
           取り消し
         </v-btn>
@@ -272,7 +272,7 @@ export default {
       cafe_position: { lat: 35.71, lng: 139.72 },
       editRequestUrl: undefined,
       snackbar: false,
-      congrestionType: undefined
+      shopCongrestionInfoId: undefined
     }
   },
   async created() {
@@ -334,22 +334,26 @@ export default {
       return googleURL
     },
     async submit(congrestion_info) {
-      this.congrestionType = congrestion_info
-      await axiosPost.post(
+      this.shopCongrestionInfoId = congrestion_info
+      const res = await axiosPost.post(
         `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/congrestion_infos`, {
           congrestion_infos: {
             id: congrestion_info
           }
         }
       )
+      this.shopCongrestionInfoId = res.data.shop_congrestion_info_id
+      console.log(this.shopCongrestionInfoId)
       this.snackbar = true
     },
-    async del_submit(congrestion_info) {
-      await axiosPost.delete(
-        `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/congrestion_infos/${congrestion_info}`
-      )
+    async del_submit() {
+      if(this.shopCongrestionInfoId){
+        await axiosPost.delete(
+          `https://api.cafepedia.jp/api/shop_congrestion_infos/${this.shopCongrestionInfoId}`
+        )
+      }
       this.snackbar = false
-      this.congrestionType = undefined
+      this.shopCongrestionInfoId = undefined
     },
   },
   head () {

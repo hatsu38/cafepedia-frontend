@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12-buster
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-{{ checksum "package.json" }}
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: yarn-{{ checksum "package.json" }}
+      - run: yarn run lint

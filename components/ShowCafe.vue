@@ -2,7 +2,7 @@
   <div>
     <v-card
       outlined
-      max-width=700
+      max-width="700"
       class="mx-auto"
     >
       <v-list-item three-line>
@@ -343,7 +343,6 @@ export default {
         }
       )
       this.shopCongrestionInfoId = res.data.shop_congrestion_info_id
-      console.log(this.shopCongrestionInfoId)
       this.snackbar = true
     },
     async del_submit() {

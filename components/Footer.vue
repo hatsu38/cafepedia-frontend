@@ -10,7 +10,7 @@
       class="brown lighten-1 white--text text-center flex"
     >
       <v-card-title class="py-1">
-        <strong class="">SNS Share</strong>
+        <strong>SNS Share</strong>
         <v-spacer />
         <v-btn
           v-for="sns in sns_buttons"

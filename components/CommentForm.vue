@@ -64,9 +64,6 @@
 
 <script>
 import axios from "axios"
-const axiosPost = axios.create({
-  xsrfHeaderName: "X-CSRF-Token"
-})
 export default {
   data() {
     return {
@@ -87,6 +84,9 @@ export default {
   },
   methods: {
     async submit() {
+      const axiosPost = axios.create({
+        xsrfHeaderName: "X-CSRF-Token"
+      })
       await axiosPost.post(
         `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/comments`,
         {

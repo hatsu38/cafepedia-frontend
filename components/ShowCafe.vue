@@ -157,7 +157,7 @@
         <h4
           class="subtitle-1 mb-1"
         >
-          混雑情報を教えてください
+          今の混雑情報を教えてください
         </h4>
         <v-row
           justify="space-around"

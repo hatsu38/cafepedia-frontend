@@ -22,7 +22,7 @@
       </template>
       <v-card>
         <v-card-title class="body-1">
-          位置情報から近い順にカフェを取得しますか？
+          現在地から近い順にカフェを取得しますか？
         </v-card-title>
         <v-card-actions>
           <v-spacer />

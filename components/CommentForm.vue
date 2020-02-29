@@ -88,7 +88,7 @@ export default {
         xsrfHeaderName: "X-CSRF-Token"
       })
       await axiosPost.post(
-        `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/comments`,
+        `https://cafepedia-api.herokuapp.com//api/shops/${this.$nuxt.$route.params.id}/comments`,
         {
           comment: {
             content: this.content,
@@ -103,7 +103,7 @@ export default {
     },
     async getComments() {
       const res = await axios.get(
-        `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/comments?`,
+        `https://cafepedia-api.herokuapp.com//api/shops/${this.$nuxt.$route.params.id}/comments?`,
         {
           params: {
             page: this.page
@@ -120,7 +120,7 @@ export default {
     },
     async getMoreComments() {
       const res = await axios.get(
-        `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/comments?`,
+        `https://cafepedia-api.herokuapp.com//api/shops/${this.$nuxt.$route.params.id}/comments?`,
         {
           params: {
             page: this.page

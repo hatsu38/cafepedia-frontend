@@ -7,7 +7,7 @@
     >
       <v-card>
         <v-img
-          :src="`https://api.cafepedia.jp/${cafe.image}`"
+          :src="`https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`"
           class="white--text align-end"
           height="40px"
         />

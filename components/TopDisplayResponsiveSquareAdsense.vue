@@ -12,7 +12,7 @@
       data-ad-slot="1832636826"
       data-ad-format="auto"
       data-full-width-responsive="false"
-    ></ins>
+    />
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>

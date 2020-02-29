@@ -69,7 +69,7 @@
     >
       <v-list-item class="mt-3">
         <img
-          :src="`https://api.cafepedia.jp/${cafe.image}`"
+          :src="`https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`"
           :alt="cafe.main_shop_eng_name"
           width="48"
           tile
@@ -392,7 +392,7 @@ export default {
       this.lng = lng
     },
     async infiniteScroll($state) {
-      const res = await axios.get("https://api.cafepedia.jp/api/search?", {
+      const res = await axios.get("https://cafepedia-api.herokuapp.com//api/search?", {
         params: {
           lat: this.lat,
           lng: this.lng,
@@ -414,7 +414,7 @@ export default {
     },
     async searchFetch() {
       this.nowSearching = true
-      const res = await axios.get("https://api.cafepedia.jp/api/search?", {
+      const res = await axios.get("https://cafepedia-api.herokuapp.com//api/search?", {
         params: {
           lat: this.lat,
           lng: this.lng,

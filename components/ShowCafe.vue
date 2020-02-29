@@ -32,7 +32,7 @@
           </v-col>
           <v-col cols="auto pa-0">
             <img
-              :src="`https://api.cafepedia.jp/${cafe.image}`"
+              :src="`https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`"
               width="90"
               height="90"
             >
@@ -282,7 +282,7 @@ export default {
       lng: this.$nuxt.$route.query.lng
     }
     const res = await axios.get(
-      `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}`,
+      `https://cafepedia-api.herokuapp.com//api/shops/${this.$nuxt.$route.params.id}`,
       { params: query }
     )
     this.cafe = res.data.shop
@@ -336,7 +336,7 @@ export default {
     async submit(congrestion_info) {
       this.shopCongrestionInfoId = congrestion_info
       const res = await axiosPost.post(
-        `https://api.cafepedia.jp/api/shops/${this.$nuxt.$route.params.id}/congrestion_infos`, {
+        `https://cafepedia-api.herokuapp.com//api/shops/${this.$nuxt.$route.params.id}/congrestion_infos`, {
           congrestion_infos: {
             id: congrestion_info
           }
@@ -348,7 +348,7 @@ export default {
     async del_submit() {
       if(this.shopCongrestionInfoId){
         await axiosPost.delete(
-          `https://api.cafepedia.jp/api/shop_congrestion_infos/${this.shopCongrestionInfoId}`
+          `https://cafepedia-api.herokuapp.com//api/shop_congrestion_infos/${this.shopCongrestionInfoId}`
         )
       }
       this.snackbar = false

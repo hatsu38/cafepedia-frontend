@@ -184,7 +184,7 @@ export default {
         this.searchQuery.stationName = ""
       } else {
         const res = await axios.get(
-          "https://api.cafepedia.jp/api/stations/search?",
+          "https://cafepedia-api.herokuapp.com//api/stations/search?",
           {
             params: { word: this.word, page: this.page }
           }

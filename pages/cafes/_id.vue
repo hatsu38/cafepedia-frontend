@@ -2,9 +2,6 @@
   <div>
     <show-cafe />
     <section class="container">
-      <comment-form />
-    </section>
-    <section class="container">
       <cafe-lists :search-query="searchQuery" />
     </section>
   </div>
@@ -12,12 +9,10 @@
 
 <script>
 import ShowCafe from '~/components/ShowCafe.vue'
-import CommentForm from '~/components/CommentForm.vue'
 import CafeLists from '~/components/CafeLists.vue'
 export default {
   components: {
     ShowCafe,
-    CommentForm,
     CafeLists
   },
   data() {

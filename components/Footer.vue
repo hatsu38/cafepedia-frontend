@@ -1,11 +1,6 @@
 <template>
-  <v-footer dark padless>
-    <v-card
-      flat
-      tile
-      width="100%"
-      class="brown lighten-1 white--text text-center flex"
-    >
+  <v-footer dark padless fixed>
+    <v-card width="100%" class="brown lighten-1 white--text text-center flex">
       <v-card-title class="py-1">
         <strong>SNS Share</strong>
         <v-spacer />

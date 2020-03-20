@@ -1,2 +1,8 @@
 # .eslintignore
 !.vuepress
+node_modules/
+test/
+.nuxt/
+dist/
+static/
+assets/

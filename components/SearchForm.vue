@@ -1,75 +1,48 @@
 <template>
   <div>
     <v-row>
-      <v-col
-        cols="4"
-        md="4"
-        class="text-center"
-      >
+      <v-col cols="4" md="4" class="text-center">
         <v-btn
           outlined
           color="pink"
           :class="{ wifiFilterOn: searchQuery.haveWifi }"
           @click="wifiFilter"
         >
-          <v-icon
-            small
-            class="mr-1"
-          >
+          <v-icon small class="mr-1">
             fas fa-wifi
           </v-icon>
           <span>Wi-Fi</span>
         </v-btn>
       </v-col>
-      <v-col
-        cols="4"
-        md="4"
-        class="text-center"
-      >
+      <v-col cols="4" md="4" class="text-center">
         <v-btn
           outlined
           color="indigo"
           :class="{ socketFilterOn: searchQuery.haveSocket }"
           @click="socketFilter"
         >
-          <v-icon
-            small
-            class="mr-1"
-          >
+          <v-icon small class="mr-1">
             fas fa-plug
           </v-icon>
           <span>電源</span>
         </v-btn>
       </v-col>
-      <v-col
-        cols="4"
-        md="4"
-        class="text-center"
-      >
+      <v-col cols="4" md="4" class="text-center">
         <v-btn
           outlined
           color="teal"
           :class="{ smokingFilterOn: searchQuery.haveSmoking }"
           @click="smokingFilter"
         >
-          <v-icon
-            small
-            class="mr-1"
-          >
+          <v-icon small class="mr-1">
             fas fa-smoking
           </v-icon>
-          <span
-            class="smoking_filter_text"
-          >
+          <span class="smoking_filter_text">
             喫煙席
           </span>
         </v-btn>
       </v-col>
-      <v-col
-        cols="12"
-        md="12"
-        class="text-center"
-      >
+      <v-col cols="12" md="12" class="text-center">
         <v-btn
           outlined
           block
@@ -77,15 +50,10 @@
           :class="{ stationToggleOn: stationSearchShow }"
           @click="stationToggle"
         >
-          <v-icon
-            small
-            class="mr-1"
-          >
+          <v-icon small class="mr-1">
             fas fa-train
           </v-icon>
-          <span
-            class="smoking_filter_text"
-          >
+          <span class="smoking_filter_text">
             駅名検索
           </span>
         </v-btn>
@@ -98,10 +66,7 @@
       :counter="30"
       label="駅名検索"
     />
-    <v-chip-group
-      column
-      active-class="primary--text"
-    >
+    <v-chip-group column active-class="primary--text">
       <v-chip
         v-for="station in stations"
         :key="station.id"
@@ -112,24 +77,15 @@
         {{ station.kanji_name }}
       </v-chip>
     </v-chip-group>
-    <v-col
-      v-if="moreRead"
-      class="text-center pa-0"
-    >
-      <v-btn
-        text
-        small
-        center
-        color="primary"
-        @click="getMoreStations"
-      >
+    <v-col v-if="moreRead" class="text-center pa-0">
+      <v-btn text small center color="primary" @click="getMoreStations">
         もっと見る
       </v-btn>
     </v-col>
   </div>
 </template>
 <script>
-import axios from "axios"
+import axios from 'axios'
 export default {
   props: {
     searchQuery: {
@@ -139,7 +95,7 @@ export default {
   },
   data() {
     return {
-      word: "",
+      word: '',
       stations: [],
       stationSearchShow: false,
       page: 1,
@@ -169,7 +125,7 @@ export default {
     },
     changeFilterFacilityCondition(facilityState) {
       // "" なら true が。true なら "" に値が変わります。
-      return facilityState ? "" : true
+      return facilityState ? '' : true
     },
     stationToggle() {
       this.stationSearchShow = !this.stationSearchShow
@@ -181,10 +137,10 @@ export default {
     async searchStation() {
       if (this.word.length <= 1) {
         this.stations = []
-        this.searchQuery.stationName = ""
+        this.searchQuery.stationName = ''
       } else {
         const res = await axios.get(
-          "https://cafepedia-api.herokuapp.com//api/stations/search?",
+          `${this.$urls.apiUrl}api/stations/search?`,
           {
             params: { word: this.word, page: this.page }
           }

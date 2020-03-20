@@ -92,22 +92,7 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    transpile: [/^vue2-google-maps($|\/)/],
-    /*
-     ** Run ESLint on save
-     */
-    extend(config, { isDev, isClient }) {
-      config.externals = config.externals || []
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
-      // GoogleMapを表示するPlugin
-    }
+    transpile: [/^vue2-google-maps($|\/)/]
   },
   env: {
     GOOGLE_MAP_API_KEY,
@@ -117,9 +102,9 @@ module.exports = {
     CAFEPEDIA_LOG_ROCKET_ID
   },
   plugins: [
-    { src: '~/plugins/vue2-google-maps', ssr: false },
+    { src: '~/plugins/vue2-google-maps', ssr: true },
     { src: '~/plugins/infiniteloading', ssr: false },
-    { src: '~/plugins/api-urls', ssr: false }
+    { src: '~/plugins/api-urls', ssr: true }
   ],
   vendor: ['vue2-google-maps'],
   modules: [
@@ -150,7 +135,7 @@ module.exports = {
   },
   webfontloader: {
     google: {
-      families: ['Noto+Sans']
+      families: ['Noto+Sans', 'M PLUS Rounded 1c']
     }
   },
   logRocket: {

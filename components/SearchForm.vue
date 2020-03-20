@@ -3,6 +3,7 @@
     <v-row>
       <v-col cols="4" md="4" class="text-center">
         <v-btn
+          width="100%"
           outlined
           color="pink"
           :class="{ wifiFilterOn: searchQuery.haveWifi }"
@@ -16,6 +17,7 @@
       </v-col>
       <v-col cols="4" md="4" class="text-center">
         <v-btn
+          width="100%"
           outlined
           color="indigo"
           :class="{ socketFilterOn: searchQuery.haveSocket }"
@@ -29,6 +31,7 @@
       </v-col>
       <v-col cols="4" md="4" class="text-center">
         <v-btn
+          width="100%"
           outlined
           color="teal"
           :class="{ smokingFilterOn: searchQuery.haveSmoking }"

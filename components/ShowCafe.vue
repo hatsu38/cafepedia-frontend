@@ -141,48 +141,6 @@
           情報の修正を提案
         </a>
       </p>
-      <v-container v-if="snackbar == false">
-        <h4 class="subtitle-1 mb-1">
-          今の混雑情報を教えてください
-        </h4>
-        <v-row justify="space-around" align="center">
-          <v-col cols="auto" justify="center" class="pa-1">
-            <v-btn small dark color="blue lighten-3" @click="submit(1)">
-              <v-icon small>
-                fa-fw fas fa-user-alt
-              </v-icon>
-              空いてる
-            </v-btn>
-          </v-col>
-          <v-col cols="auto" justify="center" class="pa-1">
-            <v-btn small dark color="amber darken-1" @click="submit(2)">
-              <v-icon small>
-                fa-fw fas fa-user-friends
-              </v-icon>
-              やや混み
-            </v-btn>
-          </v-col>
-          <v-col cols="auto" justify="center" class="pa-1">
-            <v-btn small dark color="red" @click="submit(3)">
-              <v-icon small>
-                fa-fw fas fa-users
-              </v-icon>
-              激混み
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-      <v-snackbar v-model="snackbar" :timeout="5000">
-        投稿しました
-        <v-btn
-          color="success"
-          text
-          buttom
-          @click="del_submit(shopCongrestionInfoId)"
-        >
-          取り消し
-        </v-btn>
-      </v-snackbar>
     </v-card>
     <GmapMap
       :center="cafe_position"
@@ -211,9 +169,6 @@
 </template>
 <script>
 import axios from 'axios'
-const axiosPost = axios.create({
-  xsrfHeaderName: 'X-CSRF-Token'
-})
 export default {
   data() {
     return {
@@ -292,28 +247,6 @@ export default {
         cafeSocket +
         cafeSmoking
       return googleURL
-    },
-    async submit(congrestion_info) {
-      this.shopCongrestionInfoId = congrestion_info
-      const res = await axiosPost.post(
-        `${this.$urls.apiUrl}api/shops/${this.$nuxt.$route.params.id}/congrestion_infos`,
-        {
-          congrestion_infos: {
-            id: congrestion_info
-          }
-        }
-      )
-      this.shopCongrestionInfoId = res.data.shop_congrestion_info_id
-      this.snackbar = true
-    },
-    async del_submit() {
-      if (this.shopCongrestionInfoId) {
-        await axiosPost.delete(
-          `${this.$urls.apiUrl}api/shop_congrestion_infos/${this.shopCongrestionInfoId}`
-        )
-      }
-      this.snackbar = false
-      this.shopCongrestionInfoId = undefined
     }
   },
   head() {

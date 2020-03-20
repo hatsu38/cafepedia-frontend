@@ -1,9 +1,6 @@
 <template>
   <div class="cafe-lists">
-    <v-dialog
-      v-model="dialog"
-      max-width="290"
-    >
+    <v-dialog v-model="dialog" max-width="290">
       <template v-slot:activator="{ on }">
         <v-btn
           fixed
@@ -14,7 +11,7 @@
           class="white--text currentPositionGettingNow"
           aria-label="get current position"
           title="get current position"
-          @click.stop="dialog=true"
+          @click.stop="dialog = true"
           v-on="on"
         >
           <v-icon>fas fa-map-marker-alt</v-icon>
@@ -26,17 +23,16 @@
         </v-card-title>
         <v-card-actions>
           <v-spacer />
-          <v-btn
-            color="green darken-1"
-            text
-            @click="dialog=false"
-          >
+          <v-btn color="green darken-1" text @click="dialog = false">
             いいえ
           </v-btn>
           <v-btn
             color="green darken-1"
             text
-            @click="dialog=false; clickUpdateLatLng();"
+            @click="
+              dialog = false
+              clickUpdateLatLng()
+            "
           >
             はい
           </v-btn>
@@ -57,7 +53,8 @@
       type="info"
       colored-border
     >
-      {{ cafes.length }}/<strong>{{ totalShopsCount }}</strong> 店舗表示しています
+      {{ cafes.length }}/<strong>{{ totalShopsCount }}</strong>
+      店舗表示しています
     </v-alert>
     <v-card
       v-for="cafe in cafes"
@@ -69,17 +66,16 @@
     >
       <v-list-item class="mt-3">
         <img
-          :src="`https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`"
+          :src="
+            `https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`
+          "
           :alt="cafe.main_shop_eng_name"
           width="48"
           tile
           class="mr-1"
-        >
+        />
         <v-list-item-content>
-          <h3
-            class="subtitle-2 font-weight-black"
-            style="white-space: normal;"
-          >
+          <h3 class="subtitle-2 font-weight-black" style="white-space: normal;">
             <nuxt-link
               :to="{
                 name: 'cafes-id',
@@ -100,24 +96,14 @@
         </v-list-item-content>
       </v-list-item>
       <v-card-actions class="px-5 py-0">
-        <v-row
-          class="d-flex justify-start"
-          flat
-          tile
-        >
-          <v-col
-            cols="auto"
-            justify="center"
-          >
+        <v-row class="d-flex justify-start" flat tile>
+          <v-col cols="auto" justify="center">
             <v-chip
               small
               class="group"
               :class="cafe.wifi ? 'have-wifi' : 'have-not-facility'"
             >
-              <v-icon
-                small
-                color="white"
-              >
+              <v-icon small color="white">
                 fas fa-wifi
               </v-icon>
             </v-chip>
@@ -126,10 +112,7 @@
               class="group px-4"
               :class="cafe.socket ? 'have-socket' : 'have-not-facility'"
             >
-              <v-icon
-                small
-                color="white"
-              >
+              <v-icon small color="white">
                 fas fa-plug
               </v-icon>
             </v-chip>
@@ -138,18 +121,13 @@
               class="group teal lighten-1"
               :class="cafe.smoking ? 'have-smoking' : 'have-not-facility'"
             >
-              <v-icon
-                small
-                color="white"
-              >
+              <v-icon small color="white">
                 fas fa-smoking
               </v-icon>
             </v-chip>
           </v-col>
         </v-row>
-        <v-col
-          cols="auto"
-        >
+        <v-col cols="auto">
           <v-icon
             small
             class="mb-1"
@@ -157,41 +135,33 @@
           >
             fas fa-location-arrow
           </v-icon>
-          <span
-            :class="`${cafe.main_shop_eng_name}-title`"
-            class="title"
-          >
+          <span :class="`${cafe.main_shop_eng_name}-title`" class="title">
             {{ cafe.distance }}
           </span>
         </v-col>
       </v-card-actions>
       <v-list-item>
-        <v-simple-table
-          class="my-1"
-          style="width: 100%;"
-        >
+        <v-simple-table class="my-1" style="width: 100%;">
           <tbody class="caption">
             <tr>
               <td class="pa-0 caption text-center">
-                <v-icon
-                  small
-                  class="pa-1"
-                >
+                <v-icon small class="pa-1">
                   fas fa-map
                 </v-icon>
               </td>
-              <td class="pa-1 caption">{{ cafe.access }}</td>
+              <td class="pa-1 caption">
+                <span>{{ cafe.access }}</span>
+              </td>
             </tr>
             <tr>
               <td class="pa-0 caption text-center">
-                <v-icon
-                  small
-                  class="pa-1"
-                >
+                <v-icon small class="pa-1">
                   fas fa-clock
                 </v-icon>
               </td>
-              <td class="pa-1 caption white-space-pre-inline">{{ cafe.business_hour }}</td>
+              <td class="pa-1 caption white-space-pre-inline">
+                <span>{{ cafe.business_hour }}</span>
+              </td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -249,7 +219,7 @@
 }
 </style>
 <script>
-import axios from "axios"
+import axios from 'axios'
 export default {
   props: {
     searchQuery: {
@@ -297,16 +267,13 @@ export default {
     }
     // URLがからのクエリから位置情報が取得できない
     // && localStorageから取得できるとき
-    else if (localStorage.getItem("position")) {
+    else if (localStorage.getItem('position')) {
       try {
         this.getStorage()
       } catch (error) {
-        localStorage.removeItem("position")
+        localStorage.removeItem('position')
         const position = await this.getPosition()
-        this.updatePosition(
-          position.coords.latitude,
-          position.coords.longitude
-        )
+        this.updatePosition(position.coords.latitude, position.coords.longitude)
       }
     }
     // URLからもlocalStorageでも取得できないとき
@@ -327,20 +294,17 @@ export default {
         }
         // 位置情報がOffになっているとき
         else {
-          alert("あなたの端末では、現在位置を取得できません。")
+          alert('あなたの端末では、現在位置を取得できません。')
         }
       })
     },
     async clickUpdateLatLng() {
       try {
         const position = await this.getPosition()
-        this.updatePosition(
-          position.coords.latitude,
-          position.coords.longitude
-        )
+        this.updatePosition(position.coords.latitude, position.coords.longitude)
         this.searchFetch()
       } catch (error) {
-        alert("位置情報の取得に失敗しました" + error.message)
+        alert('位置情報の取得に失敗しました' + error.message)
         this.updatePosition(35.659328, 139.700553)
         this.searchFetch()
       }
@@ -350,7 +314,7 @@ export default {
       this.lng = lng
     },
     async infiniteScroll($state) {
-      const res = await axios.get("https://cafepedia-api.herokuapp.com//api/search?", {
+      const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
         params: {
           lat: this.lat,
           lng: this.lng,
@@ -372,7 +336,7 @@ export default {
     },
     async searchFetch() {
       this.nowSearching = true
-      const res = await axios.get("https://cafepedia-api.herokuapp.com//api/search?", {
+      const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
         params: {
           lat: this.lat,
           lng: this.lng,
@@ -388,13 +352,13 @@ export default {
       this.page = 2
     },
     setStorage() {
-      localStorage.removeItem("position")
+      localStorage.removeItem('position')
       const position = { current_lat: this.lat, current_lng: this.lng }
-      localStorage.setItem("position", JSON.stringify(position))
+      localStorage.setItem('position', JSON.stringify(position))
     },
     getStorage() {
-      const position = JSON.parse(localStorage.getItem("position"))
-      this.updatePosition(position["current_lat"], position["current_lng"])
+      const position = JSON.parse(localStorage.getItem('position'))
+      this.updatePosition(position['current_lat'], position['current_lng'])
     }
   }
 }

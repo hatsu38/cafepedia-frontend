@@ -1,8 +1,5 @@
 <template>
-  <v-footer
-    dark
-    padless
-  >
+  <v-footer dark padless>
     <v-card
       flat
       tile
@@ -62,24 +59,24 @@
   </v-footer>
 </template>
 <script>
-const cafepediaURL = "https://cafepedia.jp/"
+const cafepediaURL = 'https://cafepedia.jp/'
 export default {
   data() {
     return {
       sns_buttons: {
         twitter: {
-          icon: "fab fa-twitter",
-          name: "twitter",
+          icon: 'fab fa-twitter',
+          name: 'twitter',
           link: `https://twitter.com/intent/tweet?url=${cafepediaURL}&text=カフェぺディア | あなたの近くにあるカフェがすぐに見つかる&hashtags=カフェペディア`
         },
         facebook: {
-          icon: "fab fa-facebook",
-          name: "facebook",
+          icon: 'fab fa-facebook',
+          name: 'facebook',
           link: `https://www.facebook.com/sharer/sharer.php?u=${cafepediaURL}`
         },
         line: {
-          icon: "fab fa-line",
-          name: "line",
+          icon: 'fab fa-line',
+          name: 'line',
           link: `https://line.me/R/msg/text/?${cafepediaURL}`
         }
       }

@@ -7,8 +7,8 @@
   </section>
 </template>
 <script>
-import SearchForm from "~/components/SearchForm.vue"
-import CafeLists from "~/components/CafeLists.vue"
+import SearchForm from '~/components/SearchForm.vue'
+import CafeLists from '~/components/CafeLists.vue'
 export default {
   components: {
     SearchForm,
@@ -17,10 +17,10 @@ export default {
   data() {
     return {
       searchQuery: {
-        haveSocket: "",
-        haveWifi: "",
-        haveSmoking: "",
-        stationName: ""
+        haveSocket: '',
+        haveWifi: '',
+        haveSmoking: '',
+        stationName: ''
       }
     }
   }

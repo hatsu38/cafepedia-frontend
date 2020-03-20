@@ -11,10 +11,11 @@
 </template>
 
 <style>
-body div, body button{
+body div,
+body button {
   font-family: 'Noto Sans', sans-serif;
 }
-.container{
+.container {
   max-width: 700px;
 }
 a {
@@ -71,8 +72,8 @@ a {
 }
 </style>
 <script>
-import Header from "~/components/Header.vue"
-import Footer from "~/components/Footer.vue"
+import Header from '~/components/Header.vue'
+import Footer from '~/components/Footer.vue'
 import '@fortawesome/fontawesome-free/css/all.css'
 export default {
   components: {

@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import ShowCafe from "~/components/ShowCafe.vue"
-import CommentForm from "~/components/CommentForm.vue"
-import CafeLists from "~/components/CafeLists.vue"
+import ShowCafe from '~/components/ShowCafe.vue'
+import CommentForm from '~/components/CommentForm.vue'
+import CafeLists from '~/components/CafeLists.vue'
 export default {
   components: {
     ShowCafe,

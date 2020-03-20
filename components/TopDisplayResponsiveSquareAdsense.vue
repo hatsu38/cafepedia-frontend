@@ -14,7 +14,7 @@
       data-full-width-responsive="false"
     />
     <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
+      ;(adsbygoogle = window.adsbygoogle || []).push({})
     </script>
   </div>
 </template>

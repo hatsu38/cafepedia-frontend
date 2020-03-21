@@ -22,12 +22,14 @@
             }}</span>
           </v-col>
           <v-col cols="auto pa-0">
-            <img
+            <v-img
               :src="
                 `https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`
               "
-              width="90"
-              height="90"
+              lazy-src="https://picsum.photos/10/6"
+              aspect-ratio
+              max-width="86"
+              max-height="86"
             />
           </v-col>
         </v-row>
@@ -73,7 +75,7 @@
               </v-icon>
             </td>
             <td class="pl-0 body-2 white-space-pre-inline">
-              {{ cafe.business_hour }}
+              <span>{{ cafe.business_hour }}</span>
             </td>
           </tr>
           <tr v-if="cafe.other_address">
@@ -83,7 +85,9 @@
               </v-icon>
             </td>
             <td class="pl-0 body-2">
-              {{ cafe.prefecture }}{{ cafe.city }}{{ cafe.other_address }}
+              <span>
+                {{ cafe.prefecture }}{{ cafe.city }}{{ cafe.other_address }}
+              </span>
             </td>
           </tr>
           <tr v-if="cafe.access">
@@ -113,7 +117,7 @@
               </v-icon>
             </td>
             <td class="pl-0 body-2">
-              {{ cafe.chair }}
+              <span>{{ cafe.chair }}</span>
             </td>
           </tr>
           <tr v-if="cafe.tel">
@@ -123,7 +127,7 @@
               </v-icon>
             </td>
             <td class="pl-0 body-2">
-              {{ cafe.tel }}
+              <span>{{ cafe.tel }}</span>
             </td>
           </tr>
         </tbody>

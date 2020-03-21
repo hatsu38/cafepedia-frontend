@@ -144,6 +144,7 @@ module.exports = {
   },
   sentry: {
     dsn: 'https://eb1901656a8b4fcab01d35aea67ef851@sentry.io/1831661',
+    disabled: process.env.NODE_ENV != 'production',
     config: {
       environments: ['production']
     }

@@ -70,13 +70,13 @@
       :class="cafe.main_shop_eng_name"
     >
       <v-list-item class="mt-3">
-        <img
+        <v-img
           :src="
             `https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`
           "
+          lazy-src="https://picsum.photos/10/6"
           :alt="cafe.main_shop_eng_name"
-          width="48"
-          tile
+          max-width="42"
           class="mr-1"
         />
         <v-list-item-content>

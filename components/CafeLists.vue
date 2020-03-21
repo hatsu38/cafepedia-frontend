@@ -7,7 +7,9 @@
           bottom
           right
           fab
-          color="orange lighten-2"
+          width="52px"
+          height="52px"
+          color="orange darken-2"
           class="white--text currentPositionGettingNow"
           aria-label="get current position"
           title="get current position"
@@ -15,11 +17,14 @@
           v-on="on"
         >
           <v-icon>fas fa-map-marker-alt</v-icon>
+          <div class="font-weight-bold caption">
+            探す
+          </div>
         </v-btn>
       </template>
       <v-card>
         <v-card-title class="body-1">
-          現在地から近い順にカフェを取得しますか？
+          現在地に近いカフェを探しますか
         </v-card-title>
         <v-card-actions>
           <v-spacer />
@@ -177,10 +182,12 @@
     </infinite-loading>
   </div>
 </template>
-<style scoped>
-.currentPositionGettingNow {
-  background-color: #ff9100;
+<style>
+.currentPositionGettingNow > .v-btn__content {
+  display: block !important;
 }
+</style>
+<style scoped>
 .white-space-pre-inline {
   white-space: pre-line;
 }
@@ -284,18 +291,16 @@ export default {
   methods: {
     getPosition() {
       return new Promise((resolve, reject) => {
-        // 位置情報がOnになっている時
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            resolve,
-            reject,
-            this.geolocation_optoins
-          )
-        }
         // 位置情報がOffになっているとき
-        else {
+        if (!navigator.geolocation) {
           alert('あなたの端末では、現在位置を取得できません。')
         }
+        // 位置情報がOnになっている時
+        navigator.geolocation.getCurrentPosition(
+          resolve,
+          reject,
+          this.geolocation_optoins
+        )
       })
     },
     async clickUpdateLatLng() {

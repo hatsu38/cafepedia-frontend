@@ -50,17 +50,6 @@
       color="blue darken-1"
       class="mb-1"
     />
-    <!-- 現在地からのソートをしてないときに表示 -->
-    <v-alert
-      v-if="!alreadySorted"
-      dense
-      color="orange darken-2"
-      border="left"
-      elevation="1"
-      colored-border
-    >
-      <strong>「探す」ボタン</strong>で現在地に近いカフェを探すことが出来ます
-    </v-alert>
     <!-- IndexVueのときのみ表示 -->
     <v-alert
       v-if="$route.name == 'index'"
@@ -258,7 +247,6 @@ export default {
         enableHighAccuracy: true,
         maximumAge: 2000
       },
-      alreadySorted: true
     }
   },
   watch: {
@@ -297,7 +285,6 @@ export default {
     }
     // URLからもlocalStorageでも取得できないとき
     else {
-      this.alreadySorted = false
       this.updatePosition(35.659328, 139.700553)
     }
   },
@@ -312,7 +299,6 @@ export default {
             this.geolocation_optoins
           )
         } else {
-          this.alreadySorted = false
           // 位置情報がOffになっているとき
           alert('この端末では、現在位置を取得できません。')
         }
@@ -323,7 +309,6 @@ export default {
         const position = await this.getPosition()
         this.updatePosition(position.coords.latitude, position.coords.longitude)
         this.searchFetch()
-        this.alreadySorted = true
       } catch (error) {
         alert('位置情報の取得に失敗しました' + error.message)
         this.updatePosition(35.659328, 139.700553)

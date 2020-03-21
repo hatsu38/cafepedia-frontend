@@ -1,5 +1,5 @@
 <template>
-  <v-footer text-center padless fixed>
+  <v-footer text-center padless fixed v-scroll="onScroll" v-show="showAbleFooter">
     <v-card tile width="100%" class="brown lighten-1 text-center">
       <v-card-text class="py-1">
         <v-btn
@@ -58,7 +58,15 @@ export default {
           name: 'contact form',
           link: 'https://forms.gle/ETcw6uX9EjQhwo5m9'
         }
-      }
+      },
+      showAbleFooter: false
+    }
+  },
+  methods: {
+    onScroll(e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.showAbleFooter = top > 200
     }
   }
 }

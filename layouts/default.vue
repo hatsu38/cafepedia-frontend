@@ -2,9 +2,7 @@
   <v-app dark>
     <!-- Header -->
     <Header />
-    <div>
-      <nuxt />
-    </div>
+    <nuxt />
     <!-- Footer -->
     <Footer />
   </v-app>

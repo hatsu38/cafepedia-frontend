@@ -14,9 +14,6 @@ describe('Footer.vue', () => {
     wrapper = mount(Footer, options)
   })
 
-  test('template test', () => {
-    expect(wrapper.find('strong').text()).toBe('SNS Share')
-  })
   test('SNS Twitter', () => {
     expect(wrapper.vm.sns_buttons.twitter.icon).toBe('fab fa-twitter')
     expect(wrapper.vm.sns_buttons.twitter.name).toBe('twitter')

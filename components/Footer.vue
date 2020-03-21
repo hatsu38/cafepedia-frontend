@@ -1,5 +1,11 @@
 <template>
-  <v-footer text-center padless fixed v-scroll="onScroll" v-show="showAbleFooter">
+  <v-footer
+    v-show="showAbleFooter"
+    v-scroll="onScroll"
+    text-center
+    padless
+    fixed
+  >
     <v-card tile width="100%" class="brown lighten-1 text-center">
       <v-card-text class="py-1">
         <v-btn

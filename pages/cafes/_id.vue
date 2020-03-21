@@ -20,7 +20,8 @@ export default {
       searchQuery: {
         haveSocket: this.$nuxt.$route.query.socket,
         haveWifi: this.$nuxt.$route.query.wifi,
-        haveSmoking: this.$nuxt.$route.query.smoking
+        haveSmoking: this.$nuxt.$route.query.smoking,
+        stationName: this.$nuxt.$route.query.station_name
       }
     }
   }

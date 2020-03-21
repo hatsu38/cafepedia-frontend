@@ -291,16 +291,17 @@ export default {
   methods: {
     getPosition() {
       return new Promise((resolve, reject) => {
-        // 位置情報がOffになっているとき
-        if (!navigator.geolocation) {
-          alert('あなたの端末では、現在位置を取得できません。')
+        if (navigator.geolocation) {
+          // 位置情報がOnになっている時
+          navigator.geolocation.getCurrentPosition(
+            resolve,
+            reject,
+            this.geolocation_optoins
+          )
+        } else {
+          // 位置情報がOffになっているとき
+          alert('この端末では、現在位置を取得できません。')
         }
-        // 位置情報がOnになっている時
-        navigator.geolocation.getCurrentPosition(
-          resolve,
-          reject,
-          this.geolocation_optoins
-        )
       })
     },
     async clickUpdateLatLng() {

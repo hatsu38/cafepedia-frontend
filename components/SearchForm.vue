@@ -68,6 +68,8 @@
       maxlength="30,"
       :counter="30"
       label="駅名検索"
+      prepend-icon="fas fa-train"
+      class="ma-0"
     />
     <v-chip-group column active-class="primary--text">
       <v-chip
@@ -154,6 +156,12 @@ export default {
   }
 }
 </script>
+<style>
+/* テキストフォームの中のFontAwesome */
+.v-input__icon--prepend > .fas {
+  font-size: 18px;
+}
+</style>
 <style scoped>
 .socketFilterOn {
   background-color: #1a237e;

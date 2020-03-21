@@ -50,6 +50,19 @@
       color="blue darken-1"
       class="mb-1"
     />
+    <!-- まだ位置情報がないとき -->
+    <v-alert
+      v-if="notSortedYet"
+      dense
+      color="orange darken-2"
+      border="left"
+      elevation="1"
+      colored-border
+    >
+      <span style="font-size: 13.5px;">
+        <strong>「探す」ボタン</strong>で近くのカフェを探せます
+      </span>
+    </v-alert>
     <!-- IndexVueのときのみ表示 -->
     <v-alert
       v-if="$route.name == 'index'"
@@ -59,7 +72,9 @@
       elevation="1"
       colored-border
     >
-      <strong>{{ totalShopsCount }}</strong> 店舗あります
+      <span style="font-size: 13.5px;">
+        <strong>{{ totalShopsCount }}</strong> 店舗あります
+      </span>
     </v-alert>
     <v-card
       v-for="cafe in cafes"
@@ -132,7 +147,7 @@
             </v-chip>
           </v-col>
         </v-row>
-        <v-col cols="auto">
+        <v-col cols="auto" class="pa-0">
           <v-icon
             small
             class="mb-1"
@@ -174,7 +189,7 @@
     </v-card>
     <infinite-loading
       spinner="waveDots"
-      :distance="50"
+      :distance="200"
       @infinite="infiniteScroll"
     >
       <div slot="no-more" />
@@ -226,6 +241,7 @@
 }
 </style>
 <script>
+import Cafes from '~/store/cafes'
 import axios from 'axios'
 export default {
   props: {
@@ -246,7 +262,8 @@ export default {
       geolocation_optoins: {
         enableHighAccuracy: true,
         maximumAge: 2000
-      }
+      },
+      notSortedYet: true
     }
   },
   watch: {
@@ -285,7 +302,8 @@ export default {
     }
     // URLからもlocalStorageでも取得できないとき
     else {
-      this.updatePosition(35.659328, 139.700553)
+      this.cafes = Cafes.shops
+      this.totalShopsCount = Cafes.shop_num
     }
   },
   methods: {
@@ -311,7 +329,7 @@ export default {
         this.searchFetch()
       } catch (error) {
         alert('位置情報の取得に失敗しました' + error.message)
-        this.updatePosition(35.659328, 139.700553)
+        this.cafes = Cafes.shops
         this.searchFetch()
       }
     },
@@ -356,6 +374,7 @@ export default {
     updatePosition(lat, lng) {
       this.lat = lat
       this.lng = lng
+      this.notSortedYet = false
     },
     setStorage() {
       localStorage.removeItem('position')

@@ -246,7 +246,7 @@ export default {
       geolocation_optoins: {
         enableHighAccuracy: true,
         maximumAge: 2000
-      },
+      }
     }
   },
   watch: {

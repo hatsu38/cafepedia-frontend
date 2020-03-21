@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row>
-      <v-col cols="4" md="4" class="text-center">
+      <v-col cols="4" md="4" class="text-center py-2">
         <v-btn
           width="100%"
           outlined
@@ -15,7 +15,7 @@
           <span>Wi-Fi</span>
         </v-btn>
       </v-col>
-      <v-col cols="4" md="4" class="text-center">
+      <v-col cols="4" md="4" class="text-center py-2">
         <v-btn
           width="100%"
           outlined
@@ -29,7 +29,7 @@
           <span>電源</span>
         </v-btn>
       </v-col>
-      <v-col cols="4" md="4" class="text-center">
+      <v-col cols="4" md="4" class="text-center py-2">
         <v-btn
           width="100%"
           outlined
@@ -45,7 +45,7 @@
           </span>
         </v-btn>
       </v-col>
-      <v-col cols="12" md="12" class="text-center">
+      <v-col cols="12" md="12" class="text-center py-1 pb-3">
         <v-btn
           outlined
           block
@@ -71,7 +71,7 @@
       prepend-icon="fas fa-train"
       class="ma-0"
     />
-    <v-chip-group column active-class="primary--text">
+    <v-chip-group v-if="stationSearchShow" column active-class="primary--text">
       <v-chip
         v-for="station in stations"
         :key="station.id"

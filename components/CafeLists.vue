@@ -104,8 +104,8 @@
                   lat: lat,
                   lng: lng,
                   socket: searchQuery.haveSocket,
-                  wifi: searchQuery.havewifi,
-                  smoking: searchQuery.havesmoking,
+                  wifi: searchQuery.haveWifi,
+                  smoking: searchQuery.haveSmoking,
                   station_name: searchQuery.stationName
                 }
               }"

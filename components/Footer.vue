@@ -1,13 +1,11 @@
 <template>
-  <v-footer dark padless fixed>
-    <v-card width="100%" class="brown lighten-1 white--text text-center flex">
-      <v-card-title class="py-1">
-        <strong>SNS Share</strong>
-        <v-spacer />
+  <v-footer text-center padless fixed>
+    <v-card tile width="100%" class="brown lighten-1 text-center">
+      <v-card-text class="py-1">
         <v-btn
           v-for="sns in sns_buttons"
           :key="sns.id"
-          class="white--text"
+          class="mx-2"
           icon
           :aria-label="sns.name"
           :title="sns.name"
@@ -20,34 +18,15 @@
             class="white--text"
             :aria-label="sns.name"
           >
-            <v-icon>{{ sns.icon }}</v-icon>
+            <v-icon size="20px">{{ sns.icon }}</v-icon>
           </a>
         </v-btn>
-        <v-divider />
-      </v-card-title>
+      </v-card-text>
+      <v-divider />
       <v-card-title class="py-1">
-        <strong>Contact</strong>
-        <v-spacer />
-        <v-btn
-          class="white--text"
-          icon
-          aria-label="contact form"
-          title="contact form"
-        >
-          <a
-            href="https://forms.gle/ETcw6uX9EjQhwo5m9"
-            target="_blank"
-            :prefetch="false"
-            rel="noopener"
-            class="white--text"
-            aria-label="contact form"
-          >
-            <v-icon>fas fa-envelope</v-icon>
-          </a>
-        </v-btn>
-        <v-divider />
-        <v-card-text class="white--text">
-          {{ new Date().getFullYear() }} — <strong>&copy; Cafepedia</strong>
+        <v-card-text class="white--text py-1">
+          {{ new Date().getFullYear() }} —
+          <strong>&copy; カフェペディア</strong>
         </v-card-text>
       </v-card-title>
     </v-card>
@@ -73,6 +52,11 @@ export default {
           icon: 'fab fa-line',
           name: 'line',
           link: `https://line.me/R/msg/text/?${cafepediaURL}`
+        },
+        contactForm: {
+          icon: 'fas fa-envelope',
+          name: 'contact form',
+          link: 'https://forms.gle/ETcw6uX9EjQhwo5m9'
         }
       }
     }

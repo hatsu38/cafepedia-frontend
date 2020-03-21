@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar color="brown darken-1" dense>
+    <v-toolbar color="brown lighten-1" dense>
       <nuxt-link to="/" class="white--text header--text text-center">
         カフェペディア
       </nuxt-link>

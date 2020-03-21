@@ -50,16 +50,16 @@
       color="blue darken-1"
       class="mb-1"
     />
+    <!-- IndexVueのときのみ表示 -->
     <v-alert
+      v-if="$route.name == 'index'"
       dense
       color="cyan"
       border="left"
       elevation="1"
-      type="info"
       colored-border
     >
-      {{ cafes.length }}/<strong>{{ totalShopsCount }}</strong>
-      店舗表示しています
+      <strong>{{ totalShopsCount }}</strong> 店舗あります
     </v-alert>
     <v-card
       v-for="cafe in cafes"
@@ -315,10 +315,6 @@ export default {
         this.searchFetch()
       }
     },
-    updatePosition(lat, lng) {
-      this.lat = lat
-      this.lng = lng
-    },
     async infiniteScroll($state) {
       const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
         params: {
@@ -356,6 +352,10 @@ export default {
       this.cafes = res.data.shops
       this.nowSearching = false
       this.page = 2
+    },
+    updatePosition(lat, lng) {
+      this.lat = lat
+      this.lng = lng
     },
     setStorage() {
       localStorage.removeItem('position')

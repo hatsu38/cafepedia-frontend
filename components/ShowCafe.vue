@@ -145,6 +145,15 @@
     <GmapMap
       :center="cafe_position"
       :zoom="15"
+      :options="{
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: true,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: true,
+        disableDefaultUi: false
+      }"
       map-type-id="terrain"
       style="width: 100%; height: 300px; max-width:700px;"
       class="mb-2 mx-auto"

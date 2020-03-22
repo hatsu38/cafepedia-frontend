@@ -2,7 +2,7 @@
   <div>
     <show-cafe />
     <section class="container">
-      <cafe-lists :search-query="searchQuery" />
+      <cafe-lists />
     </section>
   </div>
 </template>
@@ -14,16 +14,6 @@ export default {
   components: {
     ShowCafe,
     CafeLists
-  },
-  data() {
-    return {
-      searchQuery: {
-        haveSocket: this.$nuxt.$route.query.socket,
-        haveWifi: this.$nuxt.$route.query.wifi,
-        haveSmoking: this.$nuxt.$route.query.smoking,
-        stationName: this.$nuxt.$route.query.station_name
-      }
-    }
   }
 }
 </script>

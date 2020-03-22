@@ -71,13 +71,20 @@
       prepend-icon="fas fa-train"
       class="ma-0"
     />
-    <v-chip-group v-if="stationSearchShow" column active-class="primary--text">
+    <!-- 検索ワードがあるときに表示 -->
+    <v-chip-group
+      v-if="stations"
+      v-model="selectStationIdx"
+      column
+      active-class="primary--text"
+    >
       <v-chip
-        v-for="station in stations"
+        v-for="(station, idx) in stations"
         :key="station.id"
         small
+        ripple
         class="ma-1"
-        @click="selectStation(station.kanji_name)"
+        @click="selectStation(station.kanji_name, idx)"
       >
         {{ station.kanji_name }}
       </v-chip>
@@ -92,19 +99,21 @@
 <script>
 import axios from 'axios'
 export default {
-  props: {
-    searchQuery: {
-      type: Object,
-      required: true
-    }
-  },
   data() {
     return {
-      word: '',
+      word: this.$store.state.searchQuery.stationName,
       stations: [],
       stationSearchShow: false,
       page: 1,
       moreRead: false
+    }
+  },
+  computed: {
+    searchQuery() {
+      return this.$store.state.searchQuery
+    },
+    selectStationIdx() {
+      return this.$store.state.selectStationIdx
     }
   },
   watch: {
@@ -112,37 +121,31 @@ export default {
       this.searchStation()
     }
   },
+  created() {
+    this.searchStation()
+  },
   methods: {
     socketFilter() {
-      this.searchQuery.haveSocket = this.changeFilterFacilityCondition(
-        this.searchQuery.haveSocket
-      )
+      this.$store.commit('socketFilter', this.searchQuery.haveSocket)
     },
     wifiFilter() {
-      this.searchQuery.haveWifi = this.changeFilterFacilityCondition(
-        this.searchQuery.haveWifi
-      )
+      this.$store.commit('wifiFilter', this.searchQuery.haveWifi)
     },
     smokingFilter() {
-      this.searchQuery.haveSmoking = this.changeFilterFacilityCondition(
-        this.searchQuery.haveSmoking
-      )
-    },
-    changeFilterFacilityCondition(facilityState) {
-      // "" なら true が。true なら "" に値が変わります。
-      return facilityState ? '' : true
+      this.$store.commit('smokingFilter', this.searchQuery.haveSmoking)
     },
     stationToggle() {
       this.stationSearchShow = !this.stationSearchShow
     },
-    selectStation(stationName) {
+    selectStation(stationName, selectStationIdx) {
+      this.$store.commit('selectStation', stationName)
+      this.$store.commit('updateSelectStationIdx', selectStationIdx)
       this.stationSearchShow = false
-      this.searchQuery.stationName = stationName
     },
     async searchStation() {
       if (this.word.length <= 1) {
         this.stations = []
-        this.searchQuery.stationName = ''
+        this.$store.commit('selectStation', '')
       } else {
         const res = await axios.get(
           `${this.$urls.apiUrl}api/stations/search?`,

@@ -1,5 +1,7 @@
 <template>
-  <div class="cafe-lists">
+  <!-- FixedのFooterでコンテンツが隠れないように -->
+  <!-- Footerの高さ(83px)+15pxだけMarinを追加 -->
+  <div class="cafe-lists" style="margin-bottom: 98px;">
     <v-dialog v-model="dialog" max-width="290">
       <template v-slot:activator="{ on }">
         <v-btn
@@ -101,8 +103,8 @@
                 name: 'cafes-id',
                 params: { id: cafe.id },
                 query: {
-                  lat: lat,
-                  lng: lng,
+                  lat: searchQuery.lat,
+                  lng: searchQuery.lng,
                   socket: searchQuery.haveSocket,
                   wifi: searchQuery.haveWifi,
                   smoking: searchQuery.haveSmoking,
@@ -241,21 +243,13 @@
 }
 </style>
 <script>
-import Cafes from '~/store/cafes'
+import Cafes from '~/data/cafes'
 import axios from 'axios'
 export default {
-  props: {
-    searchQuery: {
-      type: Object,
-      required: true
-    }
-  },
   data() {
     return {
       cafes: [],
       page: 1,
-      lat: undefined,
-      lng: undefined,
       dialog: false,
       totalShopsCount: undefined,
       nowSearching: false,
@@ -266,18 +260,17 @@ export default {
       notSortedYet: true
     }
   },
+  computed: {
+    searchQuery() {
+      return this.$store.state.searchQuery
+    }
+  },
   watch: {
     searchQuery: {
       handler() {
         this.searchFetch()
       },
       deep: true
-    },
-    lat() {
-      this.setStorage()
-    },
-    lng() {
-      this.setStorage()
     }
   },
   // 位置情報の取得を行う
@@ -289,7 +282,7 @@ export default {
         this.$nuxt.$route.query.lng
       )
     }
-    // URLがからのクエリから位置情報が取得できない
+    // URLが空のクエリで位置情報が取得できない
     // && localStorageから取得できるとき
     else if (localStorage.getItem('position')) {
       try {
@@ -336,8 +329,8 @@ export default {
     async infiniteScroll($state) {
       const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
         params: {
-          lat: this.lat,
-          lng: this.lng,
+          lat: this.searchQuery.lat,
+          lng: this.searchQuery.lng,
           socket: this.searchQuery.haveSocket,
           wifi: this.searchQuery.haveWifi,
           smoking: this.searchQuery.haveSmoking,
@@ -358,8 +351,8 @@ export default {
       this.nowSearching = true
       const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
         params: {
-          lat: this.lat,
-          lng: this.lng,
+          lat: this.searchQuery.lat,
+          lng: this.searchQuery.lng,
           socket: this.searchQuery.haveSocket,
           wifi: this.searchQuery.haveWifi,
           smoking: this.searchQuery.haveSmoking,
@@ -372,13 +365,15 @@ export default {
       this.page = 2
     },
     updatePosition(lat, lng) {
-      this.lat = lat
-      this.lng = lng
+      this.$store.commit('updatePosition', { lat: lat, lng: lng })
       this.notSortedYet = false
     },
     setStorage() {
       localStorage.removeItem('position')
-      const position = { current_lat: this.lat, current_lng: this.lng }
+      const position = {
+        current_lat: this.searchQuerylat,
+        current_lng: this.searchQuerylng
+      }
       localStorage.setItem('position', JSON.stringify(position))
     },
     getStorage() {

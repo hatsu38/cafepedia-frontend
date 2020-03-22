@@ -241,15 +241,9 @@
 }
 </style>
 <script>
-import Cafes from '~/store/cafes'
+import Cafes from '~/data/cafes'
 import axios from 'axios'
 export default {
-  props: {
-    searchQuery: {
-      type: Object,
-      required: true
-    }
-  },
   data() {
     return {
       cafes: [],
@@ -264,6 +258,11 @@ export default {
         maximumAge: 2000
       },
       notSortedYet: true
+    }
+  },
+  computed: {
+    searchQuery() {
+      return this.$store.state.searchQuery
     }
   },
   watch: {

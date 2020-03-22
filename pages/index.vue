@@ -1,8 +1,8 @@
 <template>
   <section class="container">
     <div>
-      <search-form :search-query="searchQuery" />
-      <cafe-lists :search-query="searchQuery" />
+      <search-form />
+      <cafe-lists />
     </div>
   </section>
 </template>
@@ -13,16 +13,6 @@ export default {
   components: {
     SearchForm,
     CafeLists
-  },
-  data() {
-    return {
-      searchQuery: {
-        haveSocket: '',
-        haveWifi: '',
-        haveSmoking: '',
-        stationName: ''
-      }
-    }
   }
 }
 </script>

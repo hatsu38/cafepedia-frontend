@@ -1,5 +1,7 @@
 <template>
-  <div class="cafe-lists">
+  <!-- FixedのFooterでコンテンツが隠れないように -->
+  <!-- Footerの高さ(83px)+15pxだけMarinを追加 -->
+  <div class="cafe-lists" style="margin-bottom: 98px;">
     <v-dialog v-model="dialog" max-width="290">
       <template v-slot:activator="{ on }">
         <v-btn

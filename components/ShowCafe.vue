@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card outlined max-width="700" class="mx-auto">
+    <v-card tile flat max-width="700" class="mx-auto">
       <v-list-item three-line>
         <v-list-item-content>
           <h1

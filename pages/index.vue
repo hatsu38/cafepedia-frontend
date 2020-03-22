@@ -1,9 +1,7 @@
 <template>
   <section class="container">
-    <div>
-      <search-form />
-      <cafe-lists />
-    </div>
+    <search-form />
+    <cafe-lists />
   </section>
 </template>
 <script>

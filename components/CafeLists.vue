@@ -281,6 +281,7 @@ export default {
         this.$nuxt.$route.query.lat,
         this.$nuxt.$route.query.lng
       )
+      this.notSortedYet = false
     }
     // URLが空のクエリで位置情報が取得できない
     // && localStorageから取得できるとき
@@ -292,6 +293,7 @@ export default {
         const position = await this.getPosition()
         this.updatePosition(position.coords.latitude, position.coords.longitude)
       }
+      this.notSortedYet = false
     }
     // URLからもlocalStorageでも取得できないとき
     else {

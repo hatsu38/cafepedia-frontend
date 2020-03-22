@@ -26,6 +26,10 @@ export const mutations = {
   selectStation(state, stationName) {
     state.searchQuery.stationName = stationName
   },
+  updatePosition(state, { lat, lng }) {
+    state.searchQuery.lat = lat
+    state.searchQuery.lng = lng
+  },
   updateSelectStationIdx(state, selectStationIdx) {
     state.selectStationIdx = selectStationIdx
   }

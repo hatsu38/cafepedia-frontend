@@ -101,8 +101,8 @@
                 name: 'cafes-id',
                 params: { id: cafe.id },
                 query: {
-                  lat: lat,
-                  lng: lng,
+                  lat: searchQuery.lat,
+                  lng: searchQuery.lng,
                   socket: searchQuery.haveSocket,
                   wifi: searchQuery.haveWifi,
                   smoking: searchQuery.haveSmoking,
@@ -248,8 +248,6 @@ export default {
     return {
       cafes: [],
       page: 1,
-      lat: undefined,
-      lng: undefined,
       dialog: false,
       totalShopsCount: undefined,
       nowSearching: false,
@@ -271,12 +269,6 @@ export default {
         this.searchFetch()
       },
       deep: true
-    },
-    lat() {
-      this.setStorage()
-    },
-    lng() {
-      this.setStorage()
     }
   },
   // 位置情報の取得を行う
@@ -288,7 +280,7 @@ export default {
         this.$nuxt.$route.query.lng
       )
     }
-    // URLがからのクエリから位置情報が取得できない
+    // URLが空のクエリで位置情報が取得できない
     // && localStorageから取得できるとき
     else if (localStorage.getItem('position')) {
       try {
@@ -335,8 +327,8 @@ export default {
     async infiniteScroll($state) {
       const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
         params: {
-          lat: this.lat,
-          lng: this.lng,
+          lat: this.searchQuery.lat,
+          lng: this.searchQuery.lng,
           socket: this.searchQuery.haveSocket,
           wifi: this.searchQuery.haveWifi,
           smoking: this.searchQuery.haveSmoking,
@@ -357,8 +349,8 @@ export default {
       this.nowSearching = true
       const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
         params: {
-          lat: this.lat,
-          lng: this.lng,
+          lat: this.searchQuery.lat,
+          lng: this.searchQuery.lng,
           socket: this.searchQuery.haveSocket,
           wifi: this.searchQuery.haveWifi,
           smoking: this.searchQuery.haveSmoking,
@@ -371,13 +363,15 @@ export default {
       this.page = 2
     },
     updatePosition(lat, lng) {
-      this.lat = lat
-      this.lng = lng
+      this.$store.commit('updatePosition', { lat: lat, lng: lng })
       this.notSortedYet = false
     },
     setStorage() {
       localStorage.removeItem('position')
-      const position = { current_lat: this.lat, current_lng: this.lng }
+      const position = {
+        current_lat: this.searchQuerylat,
+        current_lng: this.searchQuerylng
+      }
       localStorage.setItem('position', JSON.stringify(position))
     },
     getStorage() {

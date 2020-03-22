@@ -371,8 +371,8 @@ export default {
     setStorage() {
       localStorage.removeItem('position')
       const position = {
-        current_lat: this.searchQuerylat,
-        current_lng: this.searchQuerylng
+        current_lat: this.searchQuery.lat,
+        current_lng: this.searchQuery.lng
       }
       localStorage.setItem('position', JSON.stringify(position))
     },

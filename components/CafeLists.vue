@@ -368,6 +368,7 @@ export default {
     },
     updatePosition(lat, lng) {
       this.$store.commit('updatePosition', { lat: lat, lng: lng })
+      this.setStorage()
       this.notSortedYet = false
     },
     setStorage() {

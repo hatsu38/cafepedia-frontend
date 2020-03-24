@@ -140,7 +140,7 @@
             </v-chip>
             <v-chip
               small
-              class="group teal lighten-1"
+              class="group"
               :class="cafe.smoking ? 'have-smoking' : 'have-not-facility'"
             >
               <v-icon small color="white">

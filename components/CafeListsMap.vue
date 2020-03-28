@@ -315,8 +315,8 @@ export default {
     else {
       this.cafes = Cafes.shops
       this.totalShopsCount = Cafes.shop_num
-      this.searchFetch()
     }
+    this.searchFetch()
   },
   methods: {
     toggleInfoWindow(cafe) {
@@ -348,27 +348,6 @@ export default {
         alert('位置情報の取得に失敗しました' + error.message)
         this.cafes = Cafes.shops
         this.searchFetch()
-      }
-    },
-    async infiniteScroll($state) {
-      const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
-        params: {
-          lat: this.searchQuery.lat,
-          lng: this.searchQuery.lng,
-          socket: this.searchQuery.haveSocket,
-          wifi: this.searchQuery.haveWifi,
-          smoking: this.searchQuery.haveSmoking,
-          station_name: this.searchQuery.stationName,
-          page: this.page
-        }
-      })
-      this.totalShopsCount = res.data.shop_num
-      if (res.data.shops.length > 0) {
-        this.cafes.push(...res.data.shops)
-        this.page++
-        $state.loaded()
-      } else {
-        $state.complete()
       }
     },
     async searchFetch() {

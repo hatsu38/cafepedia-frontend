@@ -100,7 +100,7 @@
         :key="cafe.id"
         :class="cafe.main_shop_eng_name"
         class="card-side-width"
-        @click="$store.commit('getMapCenterPosition', cafe)"
+        @click="toggleAndCenterUpdate(cafe)"
       >
         <v-card outlined elevation="3">
           <v-list-item class="mt-3">
@@ -262,7 +262,6 @@ export default {
       },
       currentCafeLabelName: '',
       notSortedYet: true,
-      infoWinOpen: false,
       infoWindow: {
         pos: null,
         opened: false,
@@ -318,11 +317,6 @@ export default {
     }
   },
   methods: {
-    toggleInfoWindow(cafe) {
-      this.infoWindow.pos = { lat: Number(cafe.lat), lng: Number(cafe.lng) }
-      this.infoWindow.opened = !this.infoWindow.opened
-      this.infoWindow.title = cafe.name
-    },
     getPosition() {
       return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
@@ -371,6 +365,17 @@ export default {
       this.$store.commit('updatePosition', { lat: lat, lng: lng })
       this.setStorage()
       this.notSortedYet = false
+    },
+    toggleAndCenterUpdate(cafe) {
+      this.$store.commit('getMapCenterPosition', cafe)
+      this.infoWindow.pos = { lat: Number(cafe.lat), lng: Number(cafe.lng) }
+      this.infoWindow.opened = true
+      this.infoWindow.title = cafe.name
+    },
+    toggleInfoWindow(cafe) {
+      this.infoWindow.pos = { lat: Number(cafe.lat), lng: Number(cafe.lng) }
+      this.infoWindow.opened = !this.infoWindow.opened
+      this.infoWindow.title = cafe.name
     },
     setStorage() {
       localStorage.removeItem('position')

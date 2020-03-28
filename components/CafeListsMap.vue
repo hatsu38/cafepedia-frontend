@@ -66,7 +66,6 @@
       </span>
     </v-alert>
     <GmapMap
-      v-show="centerPosition"
       :center="centerPosition"
       :zoom="14"
       :options="{
@@ -253,7 +252,6 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      cafes: [],
       page: 1,
       dialog: false,
       totalShopsCount: undefined,
@@ -279,6 +277,9 @@ export default {
   computed: {
     searchQuery() {
       return this.$store.state.searchQuery
+    },
+    cafes() {
+      return this.$store.state.cafes
     }
   },
   watch: {
@@ -313,10 +314,10 @@ export default {
     }
     // URLからもlocalStorageでも取得できないとき
     else {
-      this.cafes = Cafes.shops
+      this.$store.commit('getCafeList', Cafes.shops)
       this.totalShopsCount = Cafes.shop_num
     }
-    this.searchFetch()
+    this.getMapCenterPosition(this.cafes[0])
   },
   methods: {
     toggleInfoWindow(cafe) {
@@ -346,7 +347,7 @@ export default {
         this.searchFetch()
       } catch (error) {
         alert('位置情報の取得に失敗しました' + error.message)
-        this.cafes = Cafes.shops
+        this.$store.commit('getCafeList', Cafes.shops)
         this.searchFetch()
       }
     },
@@ -363,7 +364,7 @@ export default {
         }
       })
       this.totalShopsCount = res.data.shop_num
-      this.cafes = res.data.shops
+      this.$store.commit('getCafeList', res.data.shops)
       this.nowSearching = false
       this.page = 2
       this.getMapCenterPosition(this.cafes[0])

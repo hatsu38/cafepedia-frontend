@@ -8,7 +8,8 @@ export const state = () => ({
     stationName: ''
   },
   // 選択肢にある駅名のIndex。Topページで選択状態にするための変数
-  selectStationIdx: undefined
+  selectStationIdx: undefined,
+  cafes: []
 })
 
 export const mutations = {
@@ -32,5 +33,8 @@ export const mutations = {
   },
   updateSelectStationIdx(state, selectStationIdx) {
     state.selectStationIdx = selectStationIdx
+  },
+  getCafeList(state, cafes) {
+    state.cafes = cafes
   }
 }

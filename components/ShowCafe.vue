@@ -146,38 +146,6 @@
         </a>
       </p>
     </v-card>
-    <GmapMap
-      :center="cafe_position"
-      :zoom="15"
-      :options="{
-        zoomControl: true,
-        mapTypeControl: false,
-        scaleControl: true,
-        streetViewControl: false,
-        rotateControl: false,
-        fullscreenControl: true,
-        disableDefaultUi: false
-      }"
-      map-type-id="terrain"
-      style="width: 100%; height: 300px; max-width:700px;"
-      class="mb-2 mx-auto"
-    >
-      <GmapMarker
-        :position="cafe_position"
-        :clickable="true"
-        :draggable="true"
-      />
-    </GmapMap>
-    <a
-      :href="
-        `https://www.google.com/maps/search/?api=1&query=${cafe.prefecture}${cafe.city}${cafe.other_address}`
-      "
-      class="caption d-flex d-sm-none"
-      target="_blank"
-      rel="noopener"
-    >
-      地図を見る
-    </a>
   </div>
 </template>
 <script>

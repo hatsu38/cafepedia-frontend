@@ -9,7 +9,11 @@ export const state = () => ({
   },
   // 選択肢にある駅名のIndex。Topページで選択状態にするための変数
   selectStationIdx: undefined,
-  cafes: []
+  cafes: [],
+  mapCenterPosition: {
+    lat: undefined,
+    lng: undefined
+  }
 })
 
 export const mutations = {
@@ -36,5 +40,9 @@ export const mutations = {
   },
   getCafeList(state, cafes) {
     state.cafes = cafes
+  },
+  getMapCenterPosition(state, cafe) {
+    state.mapCenterPosition.lat = Number(cafe.lat)
+    state.mapCenterPosition.lng = Number(cafe.lng)
   }
 }

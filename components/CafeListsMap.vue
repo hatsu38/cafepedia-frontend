@@ -66,7 +66,7 @@
       </span>
     </v-alert>
     <GmapMap
-      :center="centerPosition"
+      :center="mapCenterPosition"
       :zoom="14"
       :options="{
         zoomControl: true,
@@ -81,7 +81,7 @@
       style="width: 100%; height: 450px; max-width:700px;"
       class="mb-2 mx-auto"
     >
-      <GmapInfoWindow :position="infoWindow.pos" :opened="infoWindow.open">
+      <GmapInfoWindow :position="infoWindow.pos" :opened="infoWindow.opened">
         {{ infoWindow.title }}
       </GmapInfoWindow>
       <GmapMarker
@@ -100,7 +100,7 @@
         :key="cafe.id"
         :class="cafe.main_shop_eng_name"
         class="card-side-width"
-        @click="getMapCenterPosition(cafe)"
+        @click="$store.commit('getMapCenterPosition', cafe)"
       >
         <v-card outlined elevation="3">
           <v-list-item class="mt-3">
@@ -260,10 +260,6 @@ export default {
         enableHighAccuracy: true,
         maximumAge: 2000
       },
-      centerPosition: {
-        lat: undefined,
-        lng: undefined
-      },
       currentCafeLabelName: '',
       notSortedYet: true,
       infoWinOpen: false,
@@ -280,6 +276,9 @@ export default {
     },
     cafes() {
       return this.$store.state.cafes
+    },
+    mapCenterPosition() {
+      return this.$store.state.mapCenterPosition
     }
   },
   watch: {
@@ -317,12 +316,11 @@ export default {
       this.$store.commit('getCafeList', Cafes.shops)
       this.totalShopsCount = Cafes.shop_num
     }
-    this.getMapCenterPosition(this.cafes[0])
   },
   methods: {
     toggleInfoWindow(cafe) {
       this.infoWindow.pos = { lat: Number(cafe.lat), lng: Number(cafe.lng) }
-      this.infoWindow.opened = true
+      this.infoWindow.opened = !this.infoWindow.opened
       this.infoWindow.title = cafe.name
     },
     getPosition() {
@@ -367,17 +365,12 @@ export default {
       this.$store.commit('getCafeList', res.data.shops)
       this.nowSearching = false
       this.page = 2
-      this.getMapCenterPosition(this.cafes[0])
+      this.$store.commit('getMapCenterPosition', this.cafes[0])
     },
     updatePosition(lat, lng) {
       this.$store.commit('updatePosition', { lat: lat, lng: lng })
       this.setStorage()
       this.notSortedYet = false
-    },
-    getMapCenterPosition(cafe) {
-      this.centerPosition.lat = Number(cafe.lat)
-      this.centerPosition.lng = Number(cafe.lng)
-      this.currentCafeLabelName = cafe.name
     },
     setStorage() {
       localStorage.removeItem('position')

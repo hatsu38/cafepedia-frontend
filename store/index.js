@@ -41,6 +41,9 @@ export const mutations = {
   getCafeList(state, cafes) {
     state.cafes = cafes
   },
+  pushCafeList(state, cafes) {
+    state.cafes.push(...cafes)
+  },
   getMapCenterPosition(state, cafe) {
     state.mapCenterPosition.lat = Number(cafe.lat)
     state.mapCenterPosition.lng = Number(cafe.lng)

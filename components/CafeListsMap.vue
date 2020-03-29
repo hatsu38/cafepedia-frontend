@@ -185,6 +185,16 @@
           </v-card-actions>
         </v-card>
       </li>
+      <li style="width: 140px">
+        <v-card outlined elevation="3">
+          <v-list-item @click="searchMoreFetch()">
+            もっとみる
+            <v-icon small style="margin-left: 5px;">
+              fas fa-chevron-right
+            </v-icon>
+          </v-list-item>
+        </v-card>
+      </li>
     </ul>
   </div>
 </template>
@@ -214,7 +224,7 @@
 .cafeCards > li {
   display: inline-block;
   margin-right: 5px;
-  width: 315px;
+  width: 310px;
 }
 .card-side-width {
   border-left-width: 3px !important;
@@ -259,13 +269,11 @@ export default {
     return {
       page: 1,
       dialog: false,
-      totalShopsCount: undefined,
       nowSearching: false,
       geolocation_optoins: {
         enableHighAccuracy: true,
         maximumAge: 2000
       },
-      currentCafeLabelName: '',
       notSortedYet: true,
       infoWindow: {
         pos: null,
@@ -318,7 +326,6 @@ export default {
     // URLからもlocalStorageでも取得できないとき
     else {
       this.$store.commit('getCafeList', Cafes.shops)
-      this.totalShopsCount = Cafes.shop_num
     }
   },
   methods: {
@@ -360,11 +367,27 @@ export default {
           station_name: this.searchQuery.stationName
         }
       })
-      this.totalShopsCount = res.data.shop_num
       this.$store.commit('getCafeList', res.data.shops)
       this.nowSearching = false
       this.page = 2
       this.$store.commit('getMapCenterPosition', this.cafes[0])
+    },
+    async searchMoreFetch() {
+      this.nowSearching = true
+      const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
+        params: {
+          lat: this.searchQuery.lat,
+          lng: this.searchQuery.lng,
+          socket: this.searchQuery.haveSocket,
+          wifi: this.searchQuery.haveWifi,
+          smoking: this.searchQuery.haveSmoking,
+          station_name: this.searchQuery.stationName,
+          page: this.page
+        }
+      })
+      this.$store.commit('pushCafeList', res.data.shops)
+      this.nowSearching = false
+      this.page++
     },
     updatePosition(lat, lng) {
       this.$store.commit('updatePosition', { lat: lat, lng: lng })

@@ -67,7 +67,7 @@
     </v-alert>
     <GmapMap
       :center="mapCenterPosition"
-      :zoom="14"
+      :zoom="15"
       :options="{
         zoomControl: true,
         mapTypeControl: false,
@@ -81,7 +81,11 @@
       style="width: 100%; height: 450px; max-width:700px;"
       class="mb-2 mx-auto"
     >
-      <GmapInfoWindow :position="infoWindow.pos" :opened="infoWindow.opened">
+      <GmapInfoWindow
+        :position="infoWindow.pos"
+        :opened="infoWindow.opened"
+        @closeclick="infoWindow.opened = false"
+      >
         {{ infoWindow.title }}
       </GmapInfoWindow>
       <GmapMarker
@@ -210,6 +214,7 @@
 .cafeCards > li {
   display: inline-block;
   margin-right: 5px;
+  width: 315px;
 }
 .card-side-width {
   border-left-width: 3px !important;
@@ -264,7 +269,7 @@ export default {
       notSortedYet: true,
       infoWindow: {
         pos: null,
-        opened: false,
+        opened: true,
         title: ''
       }
     }

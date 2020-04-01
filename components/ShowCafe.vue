@@ -74,7 +74,7 @@
                 fas fa-clock
               </v-icon>
             </td>
-            <td class="pl-0 body-2 white-space-pre-inline">
+            <td class="pl-0 py-2 body-2 white-space-pre-inline">
               <span>{{ cafe.business_hour }}</span>
             </td>
           </tr>
@@ -84,9 +84,19 @@
                 fas fa-map
               </v-icon>
             </td>
-            <td class="pl-0 body-2">
+            <td class="pl-0 py-2 body-2">
               <span>
                 {{ cafe.prefecture }}{{ cafe.city }}{{ cafe.other_address }}
+                <a
+                  :href="
+                    `https://www.google.com/maps/search/?api=1&query=${cafe.prefecture}${cafe.city}${cafe.other_address}`
+                  "
+                  class="caption d-flex"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  （アプリで地図を見る）
+                </a>
               </span>
             </td>
           </tr>
@@ -96,18 +106,20 @@
                 fas fa-map-marker-alt
               </v-icon>
             </td>
-            <td class="pl-0 body-2">
+            <td class="pl-0 py-2 body-2">
               {{ cafe.access }}
             </td>
           </tr>
           <tr v-if="cafe.hp">
             <td>
               <v-icon style="font-size: 18px;">
-                fas fa-link
+                fas fa-external-link-alt
               </v-icon>
             </td>
-            <td class="pl-0 body-2">
-              <a :href="cafe.hp">{{ cafe.name }}</a>
+            <td class="pl-0 py-2 body-2">
+              <a :href="cafe.hp" target="_blank" rel="noopener">
+                {{ cafe.name }}
+              </a>
             </td>
           </tr>
           <tr v-if="cafe.chair">
@@ -116,7 +128,7 @@
                 fas fa-chair
               </v-icon>
             </td>
-            <td class="pl-0 body-2">
+            <td class="pl-0 py-2 body-2">
               <span>{{ cafe.chair }}</span>
             </td>
           </tr>
@@ -126,7 +138,7 @@
                 fas fa-phone
               </v-icon>
             </td>
-            <td class="pl-0 body-2">
+            <td class="pl-0 py-2 body-2">
               <span>{{ cafe.tel }}</span>
             </td>
           </tr>

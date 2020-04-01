@@ -67,7 +67,7 @@
     </v-alert>
     <GmapMap
       :center="mapCenterPosition"
-      :zoom="15"
+      :zoom="mapZoomVal"
       :options="{
         zoomControl: true,
         mapTypeControl: false,
@@ -86,7 +86,28 @@
         :opened="infoWindow.opened"
         @closeclick="infoWindow.opened = false"
       >
-        {{ infoWindow.title }}
+        <h4>
+          <nuxt-link
+            :to="{
+              name: 'cafes-id',
+              params: { id: infoWindow.cafe.id },
+              query: {
+                lat: searchQuery.lat,
+                lng: searchQuery.lng,
+                socket: searchQuery.haveSocket,
+                wifi: searchQuery.haveWifi,
+                smoking: searchQuery.haveSmoking,
+                station_name: searchQuery.stationName
+              }
+            }"
+          >
+            {{ infoWindow.cafe.name }}
+          </nuxt-link>
+        </h4>
+        <span>
+          {{ infoWindow.cafe.prefecture }}{{ infoWindow.cafe.city
+          }}{{ infoWindow.cafe.other_address }}
+        </span>
       </GmapInfoWindow>
       <GmapMarker
         v-for="(cafe, idx) in cafes"
@@ -278,8 +299,9 @@ export default {
       infoWindow: {
         pos: null,
         opened: true,
-        title: ''
-      }
+        cafe: []
+      },
+      mapZoomVal: 15
     }
   },
   computed: {
@@ -300,6 +322,10 @@ export default {
       },
       deep: true
     }
+  },
+  created() {
+    // TopページならMapのZoom率を15に。Topページ以外では17にする。
+    this.mapZoomVal = this.$route.path === '/' ? 15 : 17
   },
   // 位置情報の取得を行う
   async beforeMount() {
@@ -398,12 +424,12 @@ export default {
       this.$store.commit('getMapCenterPosition', cafe)
       this.infoWindow.pos = { lat: Number(cafe.lat), lng: Number(cafe.lng) }
       this.infoWindow.opened = true
-      this.infoWindow.title = cafe.name
+      this.infoWindow.cafe = cafe
     },
     toggleInfoWindow(cafe) {
       this.infoWindow.pos = { lat: Number(cafe.lat), lng: Number(cafe.lng) }
       this.infoWindow.opened = !this.infoWindow.opened
-      this.infoWindow.title = cafe.name
+      this.infoWindow.cafe = cafe
     },
     setStorage() {
       localStorage.removeItem('position')

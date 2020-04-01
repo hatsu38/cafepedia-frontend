@@ -324,8 +324,8 @@ export default {
     }
   },
   created() {
-    // TopページならMapのZoom率を15に。Topページ以外では17にする。
-    this.mapZoomVal = this.$route.path === '/' ? 15 : 17
+    // TopページならMapのZoom率を15に。Topページ以外では19にする。
+    this.mapZoomVal = this.$route.path === '/' ? 15 : 19
   },
   // 位置情報の取得を行う
   async beforeMount() {

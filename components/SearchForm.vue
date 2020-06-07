@@ -74,7 +74,7 @@
     <!-- 検索ワードがあるときに表示 -->
     <v-chip-group
       v-if="stations"
-      v-model="selectStationIdx"
+      v-model="stationIdx"
       column
       active-class="primary--text"
     >
@@ -105,7 +105,8 @@ export default {
       stations: [],
       stationSearchShow: false,
       page: 1,
-      moreRead: false
+      moreRead: false,
+      stationIdx: 0
     }
   },
   computed: {
@@ -141,6 +142,7 @@ export default {
       this.$store.commit('selectStation', stationName)
       this.$store.commit('updateSelectStationIdx', selectStationIdx)
       this.stationSearchShow = false
+      this.stationIdx = this.$store.state.selectStationIdx
     },
     async searchStation() {
       if (this.word.length <= 1) {

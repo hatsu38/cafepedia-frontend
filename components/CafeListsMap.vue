@@ -119,104 +119,109 @@
         @click="toggleInfoWindow(cafe)"
       />
     </GmapMap>
-    <ul class="cafeCards">
-      <li
-        v-for="cafe in cafes"
-        :key="cafe.id"
-        :class="cafe.main_shop_eng_name"
-        class="card-side-width"
-        @click="toggleAndCenterUpdate(cafe)"
-      >
-        <v-card outlined elevation="3">
-          <v-list-item class="mt-3">
-            <v-img
-              :src="
-                `https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`
-              "
-              lazy-src="https://picsum.photos/10/6"
-              :alt="cafe.main_shop_eng_name"
-              max-width="42"
-              class="mr-1"
-            />
-            <v-list-item-content>
-              <h3 class="subtitle-2 font-weight-black three-point-reader">
-                <nuxt-link
-                  :to="{
-                    name: 'cafes-id',
-                    params: { id: cafe.id },
-                    query: {
-                      lat: searchQuery.lat,
-                      lng: searchQuery.lng,
-                      socket: searchQuery.haveSocket,
-                      wifi: searchQuery.haveWifi,
-                      smoking: searchQuery.haveSmoking,
-                      station_name: searchQuery.stationName
-                    }
-                  }"
-                >
-                  {{ cafe.name }}
-                </nuxt-link>
-              </h3>
-            </v-list-item-content>
-          </v-list-item>
-          <v-card-actions class="px-5 py-0">
-            <v-row class="d-flex justify-start" flat tile>
-              <v-col cols="auto" justify="center" class="d-flex">
-                <v-chip
+    <div v-if="cafes.length > 0">
+      <ul class="cafeCards">
+        <li
+          v-for="cafe in cafes"
+          :key="cafe.id"
+          :class="cafe.main_shop_eng_name"
+          class="card-side-width"
+          @click="toggleAndCenterUpdate(cafe)"
+        >
+          <v-card outlined elevation="3">
+            <v-list-item class="mt-3">
+              <v-img
+                :src="
+                  `https://cafepedia-images.s3-ap-northeast-1.amazonaws.com${cafe.image}`
+                "
+                lazy-src="https://picsum.photos/10/6"
+                :alt="cafe.main_shop_eng_name"
+                max-width="42"
+                class="mr-1"
+              />
+              <v-list-item-content>
+                <h3 class="subtitle-2 font-weight-black three-point-reader">
+                  <nuxt-link
+                    :to="{
+                      name: 'cafes-id',
+                      params: { id: cafe.id },
+                      query: {
+                        lat: searchQuery.lat,
+                        lng: searchQuery.lng,
+                        socket: searchQuery.haveSocket,
+                        wifi: searchQuery.haveWifi,
+                        smoking: searchQuery.haveSmoking,
+                        station_name: searchQuery.stationName
+                      }
+                    }"
+                  >
+                    {{ cafe.name }}
+                  </nuxt-link>
+                </h3>
+              </v-list-item-content>
+            </v-list-item>
+            <v-card-actions class="px-5 py-0">
+              <v-row class="d-flex justify-start" flat tile>
+                <v-col cols="auto" justify="center" class="d-flex">
+                  <v-chip
+                    small
+                    class="group mx-1-helf"
+                    :class="cafe.wifi ? 'have-wifi' : 'have-not-facility'"
+                  >
+                    <v-icon small color="white">
+                      fas fa-wifi
+                    </v-icon>
+                  </v-chip>
+                  <v-chip
+                    small
+                    class="group px-4 mx-1-helf"
+                    :class="cafe.socket ? 'have-socket' : 'have-not-facility'"
+                  >
+                    <v-icon small color="white">
+                      fas fa-plug
+                    </v-icon>
+                  </v-chip>
+                  <v-chip
+                    small
+                    class="group  mx-1-helf"
+                    :class="cafe.smoking ? 'have-smoking' : 'have-not-facility'"
+                  >
+                    <v-icon small color="white">
+                      fas fa-smoking
+                    </v-icon>
+                  </v-chip>
+                </v-col>
+              </v-row>
+              <v-col cols="auto">
+                <v-icon
                   small
-                  class="group mx-1-helf"
-                  :class="cafe.wifi ? 'have-wifi' : 'have-not-facility'"
+                  class="mb-1"
+                  :class="`${cafe.main_shop_eng_name}-title`"
                 >
-                  <v-icon small color="white">
-                    fas fa-wifi
-                  </v-icon>
-                </v-chip>
-                <v-chip
-                  small
-                  class="group px-4 mx-1-helf"
-                  :class="cafe.socket ? 'have-socket' : 'have-not-facility'"
-                >
-                  <v-icon small color="white">
-                    fas fa-plug
-                  </v-icon>
-                </v-chip>
-                <v-chip
-                  small
-                  class="group  mx-1-helf"
-                  :class="cafe.smoking ? 'have-smoking' : 'have-not-facility'"
-                >
-                  <v-icon small color="white">
-                    fas fa-smoking
-                  </v-icon>
-                </v-chip>
+                  fas fa-location-arrow
+                </v-icon>
+                <span :class="`${cafe.main_shop_eng_name}-title`" class="title">
+                  {{ cafe.distance }}
+                </span>
               </v-col>
-            </v-row>
-            <v-col cols="auto">
-              <v-icon
-                small
-                class="mb-1"
-                :class="`${cafe.main_shop_eng_name}-title`"
-              >
-                fas fa-location-arrow
+            </v-card-actions>
+          </v-card>
+        </li>
+        <li style="width: 140px">
+          <v-card outlined elevation="3">
+            <v-list-item @click="searchMoreFetch()">
+              もっとみる
+              <v-icon small style="margin-left: 5px;">
+                fas fa-chevron-right
               </v-icon>
-              <span :class="`${cafe.main_shop_eng_name}-title`" class="title">
-                {{ cafe.distance }}
-              </span>
-            </v-col>
-          </v-card-actions>
-        </v-card>
-      </li>
-      <li style="width: 140px">
-        <v-card outlined elevation="3">
-          <v-list-item @click="searchMoreFetch()">
-            もっとみる
-            <v-icon small style="margin-left: 5px;">
-              fas fa-chevron-right
-            </v-icon>
-          </v-list-item>
-        </v-card>
-      </li>
-    </ul>
+            </v-list-item>
+          </v-card>
+        </li>
+      </ul>
+    </div>
+    <div v-else style="font-size: 22px; font-weight: bold; text-align: center;">
+      該当するカフェがありません🙇🏻‍♂️
+    </div>
   </div>
 </template>
 <style>

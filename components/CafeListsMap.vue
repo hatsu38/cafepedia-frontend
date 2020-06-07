@@ -336,22 +336,10 @@ export default {
         this.$nuxt.$route.query.lng
       )
       this.notSortedYet = false
-    }
-    // URLが空のクエリで位置情報が取得できない
-    // && localStorageから取得できるとき
-    else if (localStorage.getItem('position')) {
-      try {
-        this.getStorage()
-      } catch (error) {
-        localStorage.removeItem('position')
-        const position = await this.getPosition()
-        this.updatePosition(position.coords.latitude, position.coords.longitude)
-      }
-      this.notSortedYet = false
-    }
-    // URLからもlocalStorageでも取得できないとき
-    else {
+    } else {
       this.$store.commit('getCafeList', Cafes.shops)
+      var cafe = Cafes.shops[0]
+      this.toggleAndCenterUpdate(cafe)
     }
   },
   methods: {
@@ -417,7 +405,6 @@ export default {
     },
     updatePosition(lat, lng) {
       this.$store.commit('updatePosition', { lat: lat, lng: lng })
-      this.setStorage()
       this.notSortedYet = false
     },
     toggleAndCenterUpdate(cafe) {
@@ -430,18 +417,6 @@ export default {
       this.infoWindow.pos = { lat: Number(cafe.lat), lng: Number(cafe.lng) }
       this.infoWindow.opened = !this.infoWindow.opened
       this.infoWindow.cafe = cafe
-    },
-    setStorage() {
-      localStorage.removeItem('position')
-      const position = {
-        current_lat: this.searchQuery.lat,
-        current_lng: this.searchQuery.lng
-      }
-      localStorage.setItem('position', JSON.stringify(position))
-    },
-    getStorage() {
-      const position = JSON.parse(localStorage.getItem('position'))
-      this.updatePosition(position['current_lat'], position['current_lng'])
     }
   }
 }

@@ -46,7 +46,7 @@ export const mutations = {
   },
   getMapCenterPosition(state, cafe) {
     if (!cafe) {
-      return false;
+      return false
     }
     state.mapCenterPosition.lat = Number(cafe.lat)
     state.mapCenterPosition.lng = Number(cafe.lng)

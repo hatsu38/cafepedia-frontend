@@ -19,7 +19,7 @@ $ yarn run dev
 
 # build for production and launch server
 $ yarn generate
-$ firebase deploty
+$ firebase deploy
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).

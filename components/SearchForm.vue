@@ -150,7 +150,7 @@ export default {
         this.$store.commit('selectStation', '')
       } else {
         const res = await axios.get(
-          `${this.$urls.apiUrl}api/stations/search?`,
+          `${this.$urls.apiUrl}api/search_stations?`,
           {
             params: { word: this.word, page: this.page }
           }

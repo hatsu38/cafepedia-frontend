@@ -329,7 +329,7 @@ export default {
       }
     },
     async infiniteScroll($state) {
-      const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
+      const res = await axios.get(`${this.$urls.apiUrl}api/search_shops?`, {
         params: {
           lat: this.searchQuery.lat,
           lng: this.searchQuery.lng,
@@ -351,7 +351,7 @@ export default {
     },
     async searchFetch() {
       this.nowSearching = true
-      const res = await axios.get(`${this.$urls.apiUrl}api/search?`, {
+      const res = await axios.get(`${this.$urls.apiUrl}api/search_shops?`, {
         params: {
           lat: this.searchQuery.lat,
           lng: this.searchQuery.lng,

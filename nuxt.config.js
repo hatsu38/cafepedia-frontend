@@ -32,7 +32,8 @@ module.exports = {
       { hid: 'og:description', property: 'og:description', content: baseDesc },
       { hid: 'og:image', property: 'og:image', content: baseOgp },
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:site', content: '@hatsu_38' }
+      { name: 'twitter:site', content: '@hatsu_38' },
+      { hid: 'robots', name: 'robots', content: 'noindex' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },

@@ -33,6 +33,7 @@ module.exports = {
       { hid: 'og:image', property: 'og:image', content: baseOgp },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@hatsu_38' }
+      { hid: 'robots', name: 'robots', content: 'noindex' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicons/favicon.ico' },
